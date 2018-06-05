@@ -1,0 +1,86 @@
+{% extends "app/base_site.html" %}
+{% load static %}
+
+{%  block title %}Bokeh Test{% endblock %}
+
+{% block stylesheets %}
+    {{ block.super }}
+    <link rel="stylesheet" href="http://cdn.pydata.org/bokeh/release/bokeh-0.12.0.min.css">
+    <link href="http://cdn.pydata.org/bokeh/release/bokeh-widgets-0.12.0.min.css" rel="stylesheet" type="text/css">
+    <link href="http://cdn.pydata.org/bokeh/release/bokeh-0.12.0.min.css" rel="stylesheet" type="text/css">
+    <link href="http://cdn.pydata.org/bokeh/release/bokeh-widgets-0.12.0.min.css" rel="stylesheet" type="text/css">
+
+{% endblock %}
+
+{% block content %}
+    <div class="right_col" role="main" style="overflow: hidden">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="dashboard_graph">
+                    <!-- Titulo -->
+                    <div class="row x_title">
+                        <div class="col-md-6">
+                            <h3>{{ titulo }}</h3>
+                        </div>
+                    </div>
+                    <!-- Grafica -->
+                    <div class="col-md-8 col-sm-9 col-xs-12">
+                        <div class="x_panel">
+                            {{ div | safe }}
+                        </div>
+                    </div>
+                    <!-- Datos extra -->
+                    <div class="col-md-3 col-sm-3 col-xs-12 bg-white">
+                        <div class="x_panel">
+                            <!-- Titulo -->
+                            <div class="x_title" >
+                                <h2>Configuración Búsqueda</h2>
+                                <div class="clearfix"></div>
+                            </div>
+                            <!-- Datos -->
+                            <div class="col-md-12 col-sm-12 col-xs-6">
+                                <div class="x_content" >
+                                    <div>
+                                      <p>Titulo Datos</p>
+                                      <div class="">
+                                        <div class="progress progress_sm" style="width: 76%;">
+                                          <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="80" aria-valuenow="79" style="width: 80%;"></div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    {% if form %}
+                                        <form method="post">
+                                          {% csrf_token %}
+                                                 {{ form.as_p }}
+                                           <div>
+                                                <button class="btn btn-default submit" type="submit" style="float: right;">Buscar</button>
+                                            </div>
+
+                                          {% if form.non_field_errors %}
+                                            <ul class='form-errors'>
+                                                {% for error in form.non_field_errors %}
+                                                    <li>{{ error }}</li>
+                                                {% endfor %}
+                                            </ul>
+                                          {% endif %}
+                                        </form>
+                                    {% endif %}
+                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+{% endblock content %}
+
+
+{% block javascripts %}
+    {{ block.super }}
+    <script src="http://cdn.pydata.org/bokeh/release/bokeh-0.12.15.min.js"></script>
+    <script src="http://cdn.pydata.org/bokeh/release/bokeh-widgets-0.12.15.min.js"></script>
+    {{ script | safe }}
+
+{% endblock %}

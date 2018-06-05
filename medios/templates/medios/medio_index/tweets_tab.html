@@ -1,0 +1,61 @@
+{% if tweet_list1 %}
+    <div style="width:100%; height:600px; overflow:auto;">
+    <table class="table">
+        <thead>
+            <tr>
+              <th>Usuario</th>
+              <th>Enlace</th>
+              <th>Retweets</th>
+              <th>Me gusta</th>
+              <th>Fecha</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for tweet in tweet_list %}
+            <tr>
+                <td><a href={{ tweet.usuario.sacar_url }}>{{ tweet.usuario.nombre }}</a></td>
+                <td><a href={{ tweet.sacar_url }}>{{ tweet.texto|make_list|slice:':30'|join:'' }}...</a></td>
+                <td>{{ tweet.retweets }}</td>
+                <td>{{ tweet.favoritos }}</td>
+                <td>{{ tweet.fecha }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+     </table>
+    </div>
+{% elif tweet_list %}
+
+<div class="x_content">
+    <p class="text-muted font-13 m-b-30">
+    </p>
+    <table id="datatable" class="table table-striped table-bordered dataTable no-footer" role="grid" aria-describedby="datatable_info">
+    <thead>
+    <tr role="row">
+        <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Usuario: activate to sort column ascending" style="width: 263px;">Usuario</th>
+        <th class="sorting_asc" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Enlace: activate to sort column descending" aria-sort="ascending" style="width: 420px;">
+            Enlace</th>
+        <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Retweets: activate to sort column ascending" style="width: 201px;">Retweets</th>
+        <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Me gusta: activate to sort column ascending" style="width: 113px;">Me gusta</th>
+        <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Fecha: activate to sort column ascending" style="width: 197px;">Fecha</th>
+    </thead>
+    <tbody>
+    {% for tweet in tweet_list %}
+        {% if forloop.counter|divisibleby:2 %}
+            <tr role="row" class="odd">
+        {% else %}
+            <tr role="row" class="even">
+        {% endif %}
+            <td class=""><a href="https://twitter.com/{{ tweet.usuario.nombre_pantalla }}">{{ tweet.usuario.nombre }}</a></td>
+            <td class="sorting_1"><a href={{ tweet.sacar_url }}>{{ tweet.texto|make_list|slice:':30'|join:'' }}...</a></td>
+            <td>{{ tweet.retweets }}</td>
+            <td>{{ tweet.favoritos }}</td>
+            <td>{{ tweet.fecha }}</td>
+            </tr>
+    {% endfor %}
+    </tbody>
+    </table>
+</div>
+{% else %}
+    <p>No hay tweets disponibles.</p>
+{% endif %}
+

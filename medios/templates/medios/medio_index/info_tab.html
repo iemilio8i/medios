@@ -1,0 +1,30 @@
+{% load static %}
+<div class="x_content">
+    <div class="bs-example" data-example-id="simple-jumbotron">
+        <!--<div class="jumbotron">-->
+            <div class="col-md-4 col-sm-9 col-xs-9">
+                <h2>
+                    <object data="{{ imagen_medio }}" type="image/jpg">
+                    <img src="{% static "medios/images/default_user.png" %}">
+                    </object>
+                </h2>
+            </div>
+            <div class="col-md-4 col-sm-9 col-xs-9">
+                <h2>
+                    Usuario:
+                    {% if medio.verificada %}
+                        <img src="{% static "medios/images/verified.svg" %}" alt="My image"/>
+                    {% endif %}
+                    <a href="https://twitter.com/{{ medio.nombre_pantalla }}">@{{ medio.nombre_pantalla }}</a>
+                </h2>
+                <h2>Descripcion:</h2> <p>{{ medio.descripcion }}</p>
+                <h2>Localización:</h2> <p>{{ medio.localizacion }}</p>
+            </div>
+            <div class="col-md-4 col-sm-9 col-xs-9">
+                <h2>Seguidores:</h2> <p>{{ medio.seguidores }}</p>
+                <h2>Siguiendo:</h2> <p>{{ medio.amigos }}</p>
+                <h2>Fecha creación:</h2> <p>{{ medio.fecha_creacion }}</p>
+            </div>
+        <!--</div>-->
+    </div>
+</div>

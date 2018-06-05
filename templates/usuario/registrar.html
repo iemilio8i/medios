@@ -1,0 +1,73 @@
+
+{% extends "app/base_site.html" %}
+{% load static %}
+{% block title %} Registrar {% endblock title %}
+
+{% block stylesheets %}
+  {{ block.super }}
+  <!-- Animate.css -->
+  <link href="{%  static "/static/vendors/animate.css/animate.min.css" %}" rel="stylesheet">
+{% endblock stylesheets %}
+
+{% block body_class %}login{% endblock body_class %}
+
+{% block body %}
+  <div>
+    <a class="hiddenanchor" id="signup"></a>
+
+    <div class="login_wrapper">
+      <div class="animate form login_form">
+        <section class="login_content">
+
+
+
+            {% block login %}
+          <form method="post">
+              {% csrf_token %}
+                <h1>Registro</h1>
+                    {{ form.as_table }}
+                    <div>
+                        <button class="btn btn-default submit" type="submit" value="login">Registrar</button>
+                    </div>
+
+                  {% if messages %}
+                    <ul>
+                        {% for message in messages %}
+                        <li>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                  {% endif %}
+
+            <div class="clearfix"></div>
+
+            <div class="separator">
+              <p class="change_link">¿Ya tienes una cuenta?.
+
+                <a href="{% url 'usuario:login' %}" class="to_register"> Acceder </a>
+              </p>
+
+              <div class="clearfix"></div>
+              <br/>
+
+              <div>
+                <h1><i class="fa fa-paw"></i>Tweet Medios Test</h1>
+                <p>Tweet Medios Test</p>
+              </div>
+            </div>
+
+              {% if form.non_field_errors %}
+                <ul class='form-errors'>
+                    {% for error in form.non_field_errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+              {% endif %}
+
+          </form>
+            {% endblock login %}
+        </section>
+      </div>
+
+    </div>
+  </div>
+{% endblock body %}

@@ -1,0 +1,14 @@
+{% extends "app/base_site.html" %}
+{% load static %}
+
+{% block content %}
+    <div class="right_col" role="main">
+        {% if tweet %}
+            <h3>Usuario: </h3> <ul><a href={{ tweet.usuario.sacar_url }}>{{ tweet.usuario.nombre }}</a></ul>
+            <h3>Texto: </h3> <ul>{{ tweet.texto }}</ul>
+            <h3>URL: </h3><ul><a href={{ tweet.sacar_url }}>{{ tweet.sacar_url }}</a></ul>
+        {% else %}
+            <p>No existe el tweet.</p>
+        {% endif %}
+    </div>
+{% endblock content %}

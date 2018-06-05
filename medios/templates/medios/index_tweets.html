@@ -1,0 +1,19 @@
+{% extends "app/base_site.html" %}
+{% load static %}
+
+{% block stylesheetss %}<link rel="stylesheet" type="text/css" href="{% static 'medios/style.css' %}" />{% endblock stylesheetss %}
+{% block notificaciones %}{% endblock notificaciones %}
+
+{% block content %}
+    <div class="right_col" role="main">
+        {% if tweet_list %}
+            <ul>
+            {% for tweet in tweet_list %}
+                <li><a href="{% url 'medios:tweet_detail' tweet.tweet_id %}">{{ tweet.texto }}</a></li>
+            {% endfor %}
+            </ul>
+        {% else %}
+            <p>No hay tweets disponibles.</p>
+        {% endif %}
+    </div>
+{% endblock content %}
