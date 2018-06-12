@@ -6,154 +6,43 @@ from django.utils import timezone
 
 import datetime
 
-# Bokeh
-from bokeh.plotting import figure, output_file, show
-from bokeh.embed import components
-from numpy import pi
-import matplotlib.pyplot as plt
+# Graphs
+from utils.graph import test_pie_chart, test_graph, n_words_graph, linear_plot, mean_linear_plot, locations_graph
 
 
 from .forms import ListaAparicionForm
 from .models import Choice, Question
 
-from utils.tweet_test import Tweet, Entities, User, Media, read_json_file,\
-        tweet_to_dataframe, test_df_plot, filtrar_df_fecha,\
-        buscar_palabra_df, n_palabras_comun, uniq_usuarios_df, filtrar_df_user, sacar_hastags
+from utils.tweet_test import filtrar_df_fecha,\
+        buscar_palabra_df, n_palabras_comun, uniq_usuarios_df, filtrar_df_user, procces_data
 
 
-global_list_tweet = read_json_file('F:\Desktop\TFG\Datos\ELPAIS_2000.json')
-global_df = tweet_to_dataframe(global_list_tweet)
-
-
-class IndexView(generic.ListView):
-    template_name = 'medios/index.html'
-    context_object_name = 'latest_question_list'
-
-    def get_queryset(self):
-        """
-        Return the last five published questions (not including those set to be
-        published in the future).
-        """
-        return Question.objects.filter(
-            pub_date__lte=timezone.now()
-        ).order_by('-pub_date')[:5]
-
-
-class DetailView(generic.DetailView):
-    model = Question
-    template_name = 'medios/detail.html'
-
-    def get_queryset(self):
-        """
-        Excludes any questions that aren't published yet.
-        """
-        return Question.objects.filter(pub_date__lte=timezone.now())
-
-
-class ResultsView(generic.DetailView):
-    model = Question
-    template_name = 'medios/results.html'
-
-
-
-
-# Plots
-def pie_chart(percents):
-    # define starts/ends for wedges from percentages of a circle
-    percents = [0, 0.3, 0.4, 0.6, 0.9, 1]
-    starts = [p * 2 * pi for p in percents[:-1]]
-    ends = [p * 2 * pi for p in percents[1:]]
-
-    # a color for each pie piece
-    colors = ["red", "green", "blue", "orange", "yellow"]
-
-    p = figure(x_range=(-2, 2), y_range=(-2, 2))
-
-    p.wedge(x=0, y=0, radius=1, start_angle=starts, end_angle=ends, color=colors)
-
-    return p
-
-
+# Test: Plot pie chart
 def index(request):
-    x= [1,3,5,7,9,11,13]
-    y= [1,2,3,4,5,6,7]
-    title = 'y = f(x)'
-
-    plot = figure(title= title,
-        x_axis_label= 'X-Axis',
-        y_axis_label= 'Y-Axis',
-        plot_width= 400,
-        plot_height= 400,
-        )
-    plot.line(x, y, legend= 'f(x)', line_width = 2)
-
-    percents = [0, 0.3, 0.4, 0.6, 0.9, 1]
-    starts = [p * 2 * pi for p in percents[:-1]]
-    ends = [p * 2 * pi for p in percents[1:]]
-
-    # a color for each pie piece
-    colors = ["red", "green", "blue", "orange", "yellow"]
-
-    p = figure(x_range=(-1, 1), y_range=(-1, 1))
-
-    p.wedge(x=0, y=0, radius=1, start_angle=starts, end_angle=ends, color=colors)
-
-
-    # Store Components
-    script, div = components(p)
-
+    # Call test pie chart from graph.py
+    script, div = test_pie_chart()
     # Feed them to the Django Template.
     return render(request, 'medios/bokeh_test.html', {'script' : script, 'div' : div } )
 
+
 def bokeh_prueba_tweet(request):
-    list_tweet = read_json_file('F:\Desktop\TFG\Datos\ELPAIS_2000.json')
-    df = tweet_to_dataframe(list_tweet)
-    series = test_df_plot(df).fillna(0) # fillna para pasar nan values a 0
-    print(series)
+    df = procces_data()
 
-    # Test uso filtro por fechas
-    nuevo_df = filtrar_df_fecha(df, '2016-02-16', datetime.datetime.now())
-    nuevo_series = test_df_plot(nuevo_df).fillna(0)
-
-    bseries = buscar_palabra_df(df,'la')
-    df2 = df[bseries]
-
-    counter = n_palabras_comun(df, 100)
-    print(counter)
-
-    #uniq_usuarios_df(df)
-
-    categorias = list(series.keys())
-    plot = figure(x_axis_type='datetime', plot_width=1000, plot_height=600, x_axis_label='Fecha', y_axis_label='Retweets')#, x_range=categorias
-    bar_width = 150000000/len(categorias)
-    plot.vbar(categorias, top=list(series.values), width=bar_width, line_color='green', bottom=0)
-
-
-    #Store Components
-    script, div = components(plot)
+    script, div = test_graph(df)
 
     titulo = 'Gráfica Número de Retweets por Día'
     # Feed them to the Django Template.
     return render(request, 'medios/bokeh_test.html', {'script' : script, 'div' : div, 'titulo': titulo } )
 
 
-def grafica_palabras(request, n=10, column='texto', titulo='Gráfica Palabras más Frequentes', fecha1=datetime.date(2016,1,1) ,fecha2=datetime.date.today()):
+def grafica_palabras(request, n=10, column='text', titulo='Gráfica Palabras más Frequentes', fecha1=datetime.date(2016,1,1) ,fecha2=datetime.date.today()):
 
     initial = { 'tipo_busqueda': column, 'numero_resultados':n, 'fecha_inicio': fecha1, 'fecha_final':fecha2 }
     form = ListaAparicionForm(initial=initial)
 
-    df = global_df
+    df = procces_data()
     df = filtrar_df_fecha(df, fecha1, fecha2)
-    counter = n_palabras_comun(df, n, column=column)
-    categorias = [ x[0] for x in counter ]
-    top = [ x[1] for x in counter ]
-    plot = figure(x_range=categorias, plot_width=1000, plot_height=600, x_axis_label='Palabra', y_axis_label='Frecuencia')#, x_range=categorias
-    bar_width = 1
-    plot.vbar(x=categorias, top=top, width=bar_width, line_color='green', bottom=0)
-
-
-    #Store Components
-    script, div = components(plot)
+    script, div = n_words_graph(df, n, column)
     # Feed them to the Django Template.
     return render(request, 'medios/bokeh_test.html', {'script' : script, 'div' : div, 'titulo': titulo, 'form':form } )
 
@@ -174,7 +63,7 @@ def grafica_palabras_form(request):
                 'retweets': 'Retweets',
                 'user_id': 'Id Usuario',
             }
-            if column == 'texto':
+            if column == 'text':
                 titulo = 'Gráfica de Palabras más Frecuentes'
             else:
                 titulo = 'Gráfica frecuencia de %s'%(busqueda_map[column])
@@ -197,86 +86,115 @@ def index_medio(medio, df):
     # TODO lista de ultimos tweets (incluir busqueda de tweets por fecha)
     # TODO Idea: dividir lista de tweets entre tweets propios y menciones/RTs
     # TODO Mirar clasificacion de medios por categorias (deporte, politica...)
-
-
     return
 
 
+# Submethod of medio index for managing list of tweets
+def medio_index_tweets_tab(df):
+    modified_df = df[['user_screen_name', 'user_name', 'id_str', 'text', 'retweet_count', 'favorite_count', 'created_at']]
+    return modified_df.values.tolist()
 
-
-
-def medio_index(request, medio_id=0):
-
-    # El Pais User ID: 7996082 || 7996082
-    list_tweet = read_json_file('F:\Desktop\TFG\Datos\ELPAIS_2000.json')
-    medio = 'El País'
-    medio_user = 'No se ha encontrado el medio.'
+# Looks for medio in db and returns its data
+def medio_index_get_medio(df, medio_id):
+    # TODO MONGODB
+    # Tweet con el pais:2521
+    medio_tweet = df.loc[2521]
+    medio = medio_tweet['user_name']
+    medio_user = medio_tweet['user_screen_name']
     #imagen_medio = 'http://pbs.twimg.com/profile_images/2284174872/7df3h38zabcvjylnyfe3_bigger.png'
-    imagen_medio = 'No hay imagen'
-    medio_test_id = list_tweet[0].usuario.id
+    imagen_medio = medio_tweet['user_profile_image_url']
+    imagen_medio = imagen_medio.replace('_normal', '_bigger')
+    medio_test_id = '1'
 
-    # TODO Terminar Esto: Mirar como contar los tweets de entidad
+    n_medio_tweets = len(df.loc[df['user_id_str']==medio_id])
 
-    for indice, tweet in enumerate(list_tweet):
-        print(tweet.usuario.id)
-        # Test TODO: Añadir base de datos de medios y elegir medio segun criterio
-        #if 'el país' in tweet.usuario.nombre.lower():
-        if tweet.usuario.id == medio_test_id:
-            medio = tweet.usuario.nombre
-            medio_user = tweet.usuario
-            imagen_medio = medio_user.imagen_http.replace('normal', 'bigger')
+    return medio, medio_user, imagen_medio, medio_tweet.to_dict(), n_medio_tweets
 
-    # Creacion nueva lista tweet a partir del id de medio
-    nueva_lista_tweet = []
-    for tweet in list_tweet:
-        if (medio_test_id in [ide for ide, nombre in tweet.entidades.user_mentions]) or medio_test_id == tweet.usuario.id:
-            nueva_lista_tweet.append(tweet)
+# Medio Overview, generates a bunch of bokeh graphs and returns context to show it
+def medio_index_overview(df):
+    linear_script, linear_div = linear_plot(df[['created_at', 'retweet_count']])
+    mean_script, mean_div = mean_linear_plot(df[['created_at', 'retweet_count']])
+    # N words plot
+    n_script, n_div = n_words_graph(df[['created_at', 'text']], 5, 'text')
 
-    # TODO Ahora mismo: Filtrar tweets por usuario
+    loca_list = list(df['user_location'])
+    location_script, location_div = locations_graph(loca_list, 5)
+
+    return linear_script, linear_div, mean_script, mean_div, n_script, n_div, location_script, location_div
+
+
+def overview_context(df):
+    info_title = 'Información Extra'
+    n_reply_tweets = df.loc[df['in_reply_to_screen_name'].notnull()].shape[0]
+    n_rt_tweets = len(df[df['text'].str.startswith('RT')])
+    total_tweets = df.shape[0]
+    rest_tweets = total_tweets - n_rt_tweets - n_reply_tweets
+
+    return {
+        'info_title': info_title,
+        'reply_tweets': n_reply_tweets,
+        'rt_tweets': n_rt_tweets,
+        'rest_tweets':rest_tweets,
+        'total_tweets': total_tweets,
+        }
+
+def medio_index(request, medio_id='7996082'):
+    # TODO: Extraer datos de cada medio importante
+    # El Pais User ID: 7996082 Tweet con el pais:2521
+    df = procces_data('F:\Desktop\TFG\Medios_Emilio\ELPAIS.json')
+    medio, medio_user, imagen_medio, medio_tweet, n_medio_tweets = medio_index_get_medio(df, medio_id)
+
+    # Overview
+    linear_title = 'Número de Tweets por Hora'
+    mean_title = 'Media de Retweets por Hora'
+    n_title = 'Palabras más frecuentes'
+    location_title = 'Localizaciones'
+    linear_script, linear_div, mean_script, mean_div, n_script, n_div, location_script, location_div = medio_index_overview(df)
+    pie_title = 'Hashtags más utilizados'
+    pie_script, pie_div = test_pie_chart(df)
+
+
+
+
+    over_context = overview_context(df)
+    over_context['rest_tweets']-= n_medio_tweets
+
+    # Tweet list tab proccesing
+    df_list = medio_index_tweets_tab(df)
+    uniq_users = len(set(df['user_screen_name']))
 
     context = {
-        'tweet_list':nueva_lista_tweet,
+        'tweet_list':df_list,
         'titulo':medio,
         'medio':medio_user,
         'imagen_medio':imagen_medio,
+        'medio_tweet': medio_tweet,
+        'n_medio_tweets':n_medio_tweets,
+        ## Overview
+        # Graph context
+        ##### Linear Graph
+        'linear_title':linear_title,
+        'linear_script':linear_script,
+        'linear_div':linear_div,
+        ##### Mean Linear Graph
+        'mean_title': mean_title,
+        'mean_script': mean_script,
+        'mean_div': mean_div,
+        ###### N Words Graph
+        'n_title': n_title,
+        'n_script': n_script,
+        'n_div': n_div,
+        ###### Pie chart Hastags
+        'pie_title': pie_title,
+        'pie_script': pie_script,
+        'pie_div': pie_div,
+        ###### Localizations
+        'location_title': location_title,
+        'location_script': location_script,
+        'location_div': location_div,
+        # Some info
+        'uniq_users':uniq_users,
     }
+    context = { **context, **over_context}
+
     return render(request,'medios/medio_index.html', context)
-
-
-
-
-
-# Prueba mostrar lista tweets
-def list_tweets(request):
-    list_tweet = read_json_file('F:\Desktop\TFG\Datos\ELPAIS_2000.json')
-    return render(request,'medios/index_tweets.html', {'tweet_list' : list_tweet } )
-
-
-# Prueba mostrar atributos tweet
-def detail_tweet(request, tweet_id):
-    list_tweet = read_json_file('F:\Desktop\TFG\Datos\ELPAIS_2000.json')
-    tweet = None
-    for x in list_tweet:
-        if x.tweet_id ==tweet_id:
-            tweet=x
-            break
-    return render(request, 'medios/detail_tweet.html', {'tweet' : tweet })
-
-
-def vote(request, question_id):
-    question = get_object_or_404(Question, pk=question_id)
-    try:
-        selected_choice = question.choice_set.get(pk=request.POST['choice'])
-    except (KeyError, Choice.DoesNotExist):
-        # Redisplay the question voting form.
-        return render(request, 'medios/detail.html', {
-            'question': question,
-            'error_message': "You didn't select a choice.",
-        })
-    else:
-        selected_choice.votes += 1
-        selected_choice.save()
-        # Always return an HttpResponseRedirect after successfully dealing
-        # with POST data. This prevents data from being posted twice if a
-        # user hits the Back button.
-        return HttpResponseRedirect(reverse('medios:results', args=(question.id,)))

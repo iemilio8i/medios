@@ -1,7 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="174d4eed-99c2-4756-9dfc-07c646309394" name="Default" comment="" />
+    <list default="true" id="174d4eed-99c2-4756-9dfc-07c646309394" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/utils/graph.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/medios/templates/medios/medio_index.html" beforeDir="false" afterPath="$PROJECT_DIR$/medios/templates/medios/medio_index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/medios/templates/medios/medio_index/home_tab.html" beforeDir="false" afterPath="$PROJECT_DIR$/medios/templates/medios/medio_index/home_tab.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/medios/templates/medios/medio_index/info_tab.html" beforeDir="false" afterPath="$PROJECT_DIR$/medios/templates/medios/medio_index/info_tab.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/medios/templates/medios/medio_index/tweets_tab.html" beforeDir="false" afterPath="$PROJECT_DIR$/medios/templates/medios/medio_index/tweets_tab.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/medios/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/medios/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/medios/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/medios/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/app/sidebar.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/app/sidebar.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/stopwords.json" beforeDir="false" afterPath="$PROJECT_DIR$/utils/stopwords.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/tweet_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/tweet_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/tweet_test2.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/tweet_test2.py" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -30,14 +44,26 @@
     <window id="1">
       <content type="file-editors">
         <state>
-          <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-            <file leaf-file-name="tweet_test.py" pinned="false" current-in-tab="true">
+          <leaf>
+            <file leaf-file-name="tweet_test.py" pinned="false" current-in-tab="false">
               <entry file="file://$PROJECT_DIR$/utils/tweet_test.py">
                 <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="325">
-                    <caret line="150" selection-start-line="150" selection-end-line="150" />
+                  <state relative-caret-position="595">
+                    <caret line="72" column="42" selection-start-line="72" selection-start-column="42" selection-end-line="72" selection-end-column="42" />
                     <folding>
                       <element signature="e#0#20#0" expanded="true" />
+                    </folding>
+                  </state>
+                </provider>
+              </entry>
+            </file>
+            <file leaf-file-name="graph.py" pinned="false" current-in-tab="true">
+              <entry file="file://$PROJECT_DIR$/utils/graph.py">
+                <provider selected="true" editor-type-id="text-editor">
+                  <state relative-caret-position="431">
+                    <caret line="133" selection-start-line="133" selection-end-line="133" />
+                    <folding>
+                      <element signature="e#8#60#0" expanded="true" />
                     </folding>
                   </state>
                 </provider>
@@ -53,30 +79,17 @@
       <file leaf-file-name="medio_index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/medios/templates/medios/medio_index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="178">
-              <caret line="13" column="39" selection-start-line="13" selection-start-column="39" selection-end-line="13" selection-end-column="39" />
-              <folding>
-                <element signature="e#157#180#0#HTML" expanded="true" />
-                <element signature="e#1166#1193#0#HTML" expanded="true" />
-              </folding>
+            <state relative-caret-position="-252">
+              <caret line="27" column="33" selection-start-line="27" selection-start-column="33" selection-end-line="27" selection-end-column="33" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="tweets_tab.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/medios/templates/medios/medio_index/tweets_tab.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="18">
-              <caret line="13" column="37" selection-start-line="13" selection-start-column="37" selection-end-line="13" selection-end-column="37" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/medios/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="215">
-              <caret line="217" column="65" selection-start-line="217" selection-start-column="65" selection-end-line="217" selection-end-column="65" />
+            <state relative-caret-position="261">
+              <caret line="118" lean-forward="true" selection-start-line="118" selection-end-line="118" />
               <folding>
                 <element signature="e#0#54#0" expanded="true" />
               </folding>
@@ -84,11 +97,51 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="tweet_test2.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/utils/tweet_test2.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2682">
+              <caret line="151" column="45" selection-start-line="151" selection-start-column="32" selection-end-line="151" selection-end-column="45" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="bokeh_test.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/medios/templates/medios/bokeh_test.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1098">
+              <caret line="61" column="60" selection-start-line="61" selection-start-column="60" selection-end-line="61" selection-end-column="60" />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/medios/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="216">
-              <caret line="16" column="55" selection-start-line="16" selection-start-column="55" selection-end-line="16" selection-end-column="55" />
+            <state relative-caret-position="288">
+              <caret line="20" column="1" selection-start-line="20" selection-start-column="1" selection-end-line="20" selection-end-column="1" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="tweets_tab.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/medios/templates/medios/medio_index/tweets_tab.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret column="19" selection-start-column="19" selection-end-column="19" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="home_tab.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/medios/templates/medios/medio_index/home_tab.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="331">
+              <caret line="41" column="64" lean-forward="true" selection-start-line="41" selection-start-column="64" selection-end-line="41" selection-end-column="64" />
+              <folding>
+                <element signature="n#style#0;n#div#0;n#div#1;n#div#1;n#div#0;n#div#5;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#0;n#div#3;n#div#1;n#div#0;n#div#5;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -96,8 +149,8 @@
       <file leaf-file-name="info_tab.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/medios/templates/medios/medio_index/info_tab.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="17" column="16" selection-start-line="17" selection-start-column="16" selection-end-line="17" selection-end-column="16" />
+            <state relative-caret-position="252">
+              <caret line="14" column="52" selection-start-line="14" selection-start-column="52" selection-end-line="14" selection-end-column="52" />
             </state>
           </provider>
         </entry>
@@ -108,32 +161,13 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="CSS File" />
-        <option value="Python Script" />
         <option value="HTML File" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>polls</find>
-      <find>metadata</find>
-      <find>bootstrap</find>
-      <find>das</find>
-      <find>vote</find>
-      <find>js</find>
-      <find>block</find>
-      <find>ide</find>
-      <find>id</find>
-      <find>detailview</find>
-      <find>pk</find>
-      <find>red</find>
-      <find>reverse</find>
-      <find>http</find>
-      <find>footer</find>
-      <find>read</find>
-      <find>figure</find>
-      <find>request.</find>
-      <find>json</find>
       <find>datetime</find>
       <find>hastag</find>
       <find>nav</find>
@@ -143,7 +177,31 @@
       <find>main</find>
       <find>detail</find>
       <find>go</find>
+      <find>read_json</find>
+      <find>.json</find>
+      <find>test_df</find>
+      <find>sacar_hast</find>
+      <find>test_df_plot</find>
+      <find>screen</find>
+      <find>medios:index</find>
+      <find>texto</find>
+      <find>count</find>
+      <find>index</find>
+      <find>test</find>
+      <find>div</find>
+      <find>rt</find>
+      <find>retweet</find>
+      <find>n_pala</find>
+      <find>pie</find>
+      <find>plot_widt</find>
+      <find>pie_</find>
+      <find>imagen_medio</find>
+      <find>counter</find>
+      <find>print</find>
     </findStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -176,25 +234,27 @@
         <option value="$PROJECT_DIR$/usuario/views.py" />
         <option value="$PROJECT_DIR$/templates/usuario/registrar.html" />
         <option value="$PROJECT_DIR$/templates/app/footer.html" />
-        <option value="$PROJECT_DIR$/templates/app/sidebar.html" />
-        <option value="$PROJECT_DIR$/utils/stopwords.json" />
         <option value="$PROJECT_DIR$/medios/templates/forms.py" />
         <option value="$PROJECT_DIR$/medios/forms.py" />
         <option value="$PROJECT_DIR$/medios/views_medios.py" />
         <option value="$PROJECT_DIR$/templates/app/top_navigation.html" />
         <option value="$PROJECT_DIR$/templates/home.html" />
-        <option value="$PROJECT_DIR$/medios/templates/medios/medio_index/home_tab.html" />
         <option value="$PROJECT_DIR$/medios/templates/medios/detail_tweet.html" />
         <option value="$PROJECT_DIR$/templates/app/tables_dynamic.html" />
         <option value="$PROJECT_DIR$/templates/app/base_site.html" />
         <option value="$PROJECT_DIR$/medios/static/static/build/css/custom.css" />
-        <option value="$PROJECT_DIR$/medios/templates/medios/bokeh_test.html" />
-        <option value="$PROJECT_DIR$/medios/templates/medios/medio_index/tweets_tab.html" />
+        <option value="$PROJECT_DIR$/utils/tweet_test2.py" />
+        <option value="$PROJECT_DIR$/templates/app/sidebar.html" />
         <option value="$PROJECT_DIR$/medios/urls.py" />
         <option value="$PROJECT_DIR$/medios/templates/medios/medio_index.html" />
-        <option value="$PROJECT_DIR$/utils/tweet_test.py" />
+        <option value="$PROJECT_DIR$/medios/templates/medios/medio_index/tweets_tab.html" />
+        <option value="$PROJECT_DIR$/medios/templates/medios/bokeh_test.html" />
+        <option value="$PROJECT_DIR$/utils/stopwords.json" />
         <option value="$PROJECT_DIR$/medios/templates/medios/medio_index/info_tab.html" />
+        <option value="$PROJECT_DIR$/medios/templates/medios/medio_index/home_tab.html" />
         <option value="$PROJECT_DIR$/medios/views.py" />
+        <option value="$PROJECT_DIR$/utils/tweet_test.py" />
+        <option value="$PROJECT_DIR$/utils/graph.py" />
       </list>
     </option>
   </component>
@@ -232,12 +292,13 @@
       <path value="$PROJECT_DIR$/medios/static/static/vendors/transitionize/package.json" />
     </packageJsonPaths>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="5" />
     <option name="y" value="-18" />
     <option name="width" value="1936" />
     <option name="height" value="1056" />
   </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
@@ -375,22 +436,21 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32897604" />
-      <window_info anchor="bottom" id="Event Log" order="13" side_tool="true" />
+      <window_info anchor="bottom" id="Event Log" order="13" sideWeight="0.5010661" side_tool="true" weight="0.4335512" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.18845315" />
-      <window_info anchor="bottom" id="Version Control" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Python Console" order="10" />
-      <window_info anchor="bottom" id="Terminal" order="11" weight="0.45860568" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.09434968" />
+      <window_info active="true" anchor="bottom" id="Version Control" order="8" sideWeight="0.49946696" visible="true" weight="0.32897604" />
+      <window_info anchor="bottom" id="Python Console" order="10" weight="0.32897604" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.38235295" />
+      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.4989339" weight="0.39215687" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.102878466" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="4" weight="0.32995737" />
       <window_info anchor="right" id="SciView" order="3" weight="0.32995737" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39978212" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
@@ -402,15 +462,14 @@
     </layout>
     <layout-to-restore>
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.09434968" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="8" show_stripe_button="false" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" id="SciView" order="3" weight="0.32995737" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.09434968" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32897604" />
-      <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="8" show_stripe_button="false" />
       <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.28976035" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32897604" />
       <window_info anchor="bottom" id="Python Console" order="10" />
@@ -418,8 +477,9 @@
       <window_info anchor="right" id="Database" order="4" weight="0.32995737" />
       <window_info anchor="bottom" id="Terminal" order="11" weight="0.45860568" />
       <window_info anchor="bottom" id="Event Log" order="13" side_tool="true" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="right" id="SciView" order="3" weight="0.32995737" />
       <window_info anchor="bottom" id="Database Console" order="12" weight="0.32897604" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info id="Favorites" order="2" side_tool="true" />
@@ -437,34 +497,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/medios/apps.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret selection-end-line="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/usuario/apps.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="54">
-          <caret line="3" column="13" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://d770ce5e-569c-4842-9137-a389b856e7f3/schema/main/table/medios_choice">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://d770ce5e-569c-4842-9137-a389b856e7f3/schema/main/table/auth_user">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/app/page_403.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-92" />
@@ -539,13 +571,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ProyectoTFG/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="468">
-          <caret line="26" selection-start-line="26" selection-end-line="26" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/usuario/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="412">
@@ -574,20 +599,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/app/sidebar.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="612">
-          <caret line="34" column="80" selection-start-line="34" selection-start-column="80" selection-end-line="34" selection-end-column="80" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/utils/stopwords.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="6247" selection-start-column="6247" selection-end-column="6247" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/medios/templates/forms.py" />
     <entry file="file://$PROJECT_DIR$/templates/usuario/registrar.html">
       <provider selected="true" editor-type-id="text-editor">
@@ -605,11 +616,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/app/index2.html">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/medios/static/static/vendors/Chart.js/dist/Chart.min.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-13017" />
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/medios/views_medios.py" />
     <entry file="file://$PROJECT_DIR$/medios/static/medios/style.css">
@@ -659,13 +665,6 @@
         <state relative-caret-position="-2538" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/medios/templates/medios/medio_index/home_tab.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="16" selection-start-column="16" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/medios/templates/medios/index_tweets.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="288">
@@ -680,39 +679,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/home.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="16" column="26" selection-start-line="16" selection-start-column="26" selection-end-line="16" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/medios/templates/medios/bokeh_test.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="15" column="62" selection-start-line="15" selection-start-column="62" selection-end-line="15" selection-end-column="62" />
-          <folding>
-            <element signature="n#block#1;n#!!top" />
-            <element signature="e#652#676#0#HTML" expanded="true" />
-            <element signature="e#661#3629#0#HTML" />
-            <element signature="e#1985#2004#0#HTML" expanded="true" />
-            <element signature="e#2598#2619#0#HTML" expanded="true" />
-            <element signature="n#block#3;n#!!top" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/medios/static/static/build/css/custom.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="6856">
           <caret line="499" selection-start-line="499" selection-end-line="499" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/utils/tweet_test2.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="716">
-          <caret line="267" column="28" selection-start-line="267" selection-start-column="28" selection-end-line="267" selection-end-column="28" />
         </state>
       </provider>
     </entry>
@@ -723,61 +693,144 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/ProyectoTFG/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="324">
+          <caret line="22" column="73" selection-start-line="22" selection-start-column="69" selection-end-line="22" selection-end-column="73" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/home.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="16" column="26" selection-start-line="16" selection-start-column="26" selection-end-line="16" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/templates/app/base_site.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18">
+        <state relative-caret-position="783">
           <caret line="58" column="19" selection-start-line="58" selection-start-column="19" selection-end-line="58" selection-end-column="19" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/medios/urls.py">
+    <entry file="file://$PROJECT_DIR$/templates/app/sidebar.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="16" column="55" selection-start-line="16" selection-start-column="55" selection-end-line="16" selection-end-column="55" />
+        <state relative-caret-position="72">
+          <caret line="4" column="38" selection-start-line="4" selection-start-column="38" selection-end-line="4" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/stopwords.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="6069" selection-start-column="6069" selection-end-column="6069" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/medios/static/static/vendors/Chart.js/dist/Chart.min.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/medios/static/static/vendors/Chart.js/dist/Chart.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-7956">
+          <caret line="35" column="17" lean-forward="true" selection-start-line="35" selection-start-column="17" selection-end-line="35" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/app/chartjs.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-60">
+          <caret line="173" column="21" selection-start-line="173" selection-start-column="18" selection-end-line="173" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/medios/templates/medios/medio_index/info_tab.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="14" column="52" selection-start-line="14" selection-start-column="52" selection-end-line="14" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/tweet_test2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2682">
+          <caret line="151" column="45" selection-start-line="151" selection-start-column="32" selection-end-line="151" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/medios/templates/medios/bokeh_test.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1098">
+          <caret line="61" column="60" selection-start-line="61" selection-start-column="60" selection-end-line="61" selection-end-column="60" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/medios/templates/medios/medio_index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="178">
-          <caret line="13" column="39" selection-start-line="13" selection-start-column="39" selection-end-line="13" selection-end-column="39" />
-          <folding>
-            <element signature="e#157#180#0#HTML" expanded="true" />
-            <element signature="e#1166#1193#0#HTML" expanded="true" />
-          </folding>
+        <state relative-caret-position="-252">
+          <caret line="27" column="33" selection-start-line="27" selection-start-column="33" selection-end-line="27" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/medios/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="20" column="1" selection-start-line="20" selection-start-column="1" selection-end-line="20" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/medios/templates/medios/medio_index/tweets_tab.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="19" selection-start-column="19" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://F:/Users/IEmil/Anaconda3/Lib/site-packages/pandas/core/internals.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="3842" selection-start-line="3842" selection-end-line="3842" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/utils/tweet_test.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="325">
-          <caret line="150" selection-start-line="150" selection-end-line="150" />
+        <state relative-caret-position="595">
+          <caret line="72" column="42" selection-start-line="72" selection-start-column="42" selection-end-line="72" selection-end-column="42" />
           <folding>
             <element signature="e#0#20#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/medios/templates/medios/medio_index/info_tab.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="17" column="16" selection-start-line="17" selection-start-column="16" selection-end-line="17" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/medios/templates/medios/medio_index/tweets_tab.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18">
-          <caret line="13" column="37" selection-start-line="13" selection-start-column="37" selection-end-line="13" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/medios/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="215">
-          <caret line="217" column="65" selection-start-line="217" selection-start-column="65" selection-end-line="217" selection-end-column="65" />
+        <state relative-caret-position="261">
+          <caret line="118" lean-forward="true" selection-start-line="118" selection-end-line="118" />
           <folding>
             <element signature="e#0#54#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/graph.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="431">
+          <caret line="133" selection-start-line="133" selection-end-line="133" />
+          <folding>
+            <element signature="e#8#60#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/medios/templates/medios/medio_index/home_tab.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="331">
+          <caret line="41" column="64" lean-forward="true" selection-start-line="41" selection-start-column="64" selection-end-line="41" selection-end-column="64" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#1;n#div#1;n#div#0;n#div#5;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#3;n#div#1;n#div#0;n#div#5;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>

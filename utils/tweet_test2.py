@@ -247,6 +247,28 @@ def procces_data(path):
 
     ]]
 
+def tweet_to_dataframe(list_tweet):
+    # Columnas del objeto para formar el DataFrame
+    columns = ['texto', 'tweet_id', 'fecha', 'retweets', 'favoritos', 'user_mentions', 'user_id', 'user_nombre' ]
+    # Lista a tratar de forma especial
+    excluir_entidades = ['user_mentions' ]
+    excluir_user = [('user_id','id'), ('user_nombre','nombre')]
+    # Diccionario con el data para formar DataFrame
+    dict = { atributo : [] for atributo in columns }
+    for tweet in list_tweet:
+        for key, lista in dict.items():
+            if key in excluir_entidades:
+                lista.append(getattr(tweet.entidades, key))
+            elif key in [x[0] for x in excluir_user]:
+                n_key = [x[1] for x in excluir_user if x[0]==key][0]
+                lista.append(getattr(tweet.usuario, n_key))
+            else:
+                lista.append(getattr(tweet, key))
+
+    # Construir DataFrame
+    df = pd.DataFrame.from_dict(dict)
+    return df
+
 
 # TEST PANDAS
 def test_pandas(path):
@@ -270,7 +292,7 @@ def test_pandas(path):
     #   print row[column]
 
     # Group by days
-    # df.set_index('created_at').groupby(pd.TimeGrouper('D'))['retweet_count'].mean()
+    # df.set_index('fecha').groupby(pd.Grouper(freq='D'))['retweets'].mean()
     # Sacar lista
     # df.set_index('created_at').groupby(pd.TimeGrouper('D'))['retweet_count'].apply(list)
     # df.loc[df['column_name'] == some_value]
@@ -281,6 +303,7 @@ def test_pandas(path):
 
     # Serie bool de los tweets k contienen 'la'
     x = df['text'].str.contains('la')
+    df['entities'].apply(lambda x: len(x.keys()))
 
 
 def main():

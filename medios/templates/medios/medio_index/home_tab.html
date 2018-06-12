@@ -1,1 +1,86 @@
-holaaaaaaaaaaaaa
+
+<div class="col-md-4 col-sm-6 col-xs-12">
+    <div class="x_panel">
+        <div class="x_title"><h3>{{ linear_title }}</h3></div>
+        <div class="x_content">
+            {{ linear_div | safe }}
+        </div>
+    </div>
+    {{ linear_script | safe }}
+</div>
+
+<div class="col-md-4 col-sm-6 col-xs-12">
+    <div class="x_panel">
+        <div class="x_title"><h3>{{ mean_title }}</h3></div>
+        <div class="x_content">
+            {{ mean_div | safe }}
+        </div>
+    </div>
+    {{ mean_script | safe }}
+</div>
+<div class="col-md-4 col-sm-6 col-xs-12">
+    <div class="x_panel">
+        <div class="x_title"><h3>{{ n_title }}</h3></div>
+        <div class="x_content">
+            {{ n_div | safe }}
+        </div>
+    </div>
+    {{ n_script | safe }}
+</div>
+
+<div class="col-md-4 col-sm-6 col-xs-12">
+    <div class="x_panel">
+        <div class="x_title"><h3>{{ pie_title }}</h3></div>
+        <div class="x_content">
+            {{ pie_div | safe }}
+        </div>
+    </div>
+    {{ pie_script | safe }}
+</div>
+<div class="col-md-4 col-sm-6 col-xs-12">
+    <div class="x_panel">
+        <div class="x_title"><h3>{{ location_title }}</h3></div>
+        <div class="x_content">
+            {{ location_div | safe }}
+        </div>
+    </div>
+    {{ location_script | safe }}
+</div>
+<div class="col-md-4 col-sm-6 col-xs-12">
+    <div class="x_panel">
+        <div class="x_title"><h3>{{ info_title }}</h3></div>
+        <div class="x_content">
+            Número de Tweets respuesta: {{ reply_tweets }}
+            <div class="">
+                <div class="progress progress_sm" style="width: 76%;">
+                    <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="{% widthratio reply_tweets total_tweets 100 %}" aria-valuenow="{% widthratio reply_tweets total_tweets 100 %}" style="width: {% widthratio reply_tweets total_tweets 100 %}%;"></div>
+                </div>
+            </div>
+            Número de Retweets: {{ rt_tweets }}
+            <div class="">
+                <div class="progress progress_sm" style="width: 76%;">
+                    <div class="progress-bar bg-blue" role="progressbar" data-transitiongoal="{% widthratio rt_tweets total_tweets 100 %}" aria-valuenow="{% widthratio rt_tweets total_tweets 100 %}" style="width: {% widthratio rt_tweets total_tweets 100 %}%;"></div>
+                </div>
+            </div>
+            Tweets de {{ titulo }}: {{ n_medio_tweets }}
+            <div class="">
+                <div class="progress progress_sm" style="width: 76%;">
+                    <div class="progress-bar bg-orange" role="progressbar" data-transitiongoal="{% widthratio n_medio_tweets total_tweets 100 %}" aria-valuenow="{% widthratio n_medio_tweets total_tweets 100 %}" style="width: {% widthratio n_medio_tweets total_tweets 100 %}%;"></div>
+                </div>
+            </div>
+            Número de usuarios diferentes: {{ uniq_users }}
+            <div class="">
+                <div class="progress progress_sm" style="width: 76%;">
+                    <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="{% widthratio uniq_users total_tweets 100 %}" aria-valuenow="{% widthratio uniq_users total_tweets 100 %}" style="width: {% widthratio uniq_users total_tweets 100 %}%;"></div>
+                </div>
+            </div>
+            Resto de tweets: {{ rest_tweets }}
+            <div class="">
+                <div class="progress progress_sm" style="width: 76%;">
+                    <div class="progress-bar bg-red" role="progressbar" data-transitiongoal="{% widthratio rest_tweets total_tweets 100 %}" aria-valuenow="{% widthratio rest_tweets total_tweets 100 %}" style="width: {% widthratio rest_tweets total_tweets 100 %}%;"></div>
+                </div>
+            </div>
+            Total: {{ total_tweets }}
+        </div>
+    </div>
+</div>

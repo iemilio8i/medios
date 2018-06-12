@@ -3,6 +3,7 @@
 
 {%  block title %}Índice Medio{% endblock %}
 
+
 {% block content %}
     <div class="right_col" role="main" style="overflow:hidden">
         <div class>
@@ -24,7 +25,7 @@
             </div>
 
             <!-- Medio content -->
-            <div class="col-md-9 col-sm-9 col-xs-12">
+            <div class="col-md-12 col-sm-9 col-xs-12">
                 <!-- Panel -->
                 <div class="x_panel">
                     <!-- Titulo Panel -->
@@ -73,30 +74,40 @@
 {% endblock content %}
 
 {% block javascripts %}
-  {{ block.super }}
-  <!-- Datatables -->
-  <script src="{% static "/static/vendors/datatables.net/js/jquery.dataTables.min.js" %}"></script>
-  <script src="{% static "/static/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js" %}"></script>
-  <script src="{% static "/static/vendors/datatables.net-buttons/js/dataTables.buttons.min.js" %}"></script>
-  <script src="{% static "/static/vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js" %}"></script>
-  <script src="{% static "/static/vendors/datatables.net-buttons/js/buttons.flash.min.js" %}"></script>
-  <script src="{% static "/static/vendors/datatables.net-buttons/js/buttons.html5.min.js" %}"></script>
-  <script src="{% static "/static/vendors/datatables.net-buttons/js/buttons.print.min.js" %}"></script>
-  <script src="{% static "/static/vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js" %}"></script>
-  <script src="{% static "/static/vendors/datatables.net-keytable/js/dataTables.keyTable.min.js" %}"></script>
-  <script src="{% static "/static/vendors/datatables.net-responsive/js/dataTables.responsive.min.js" %}"></script>
-  <script src="{% static "/static/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js" %}"></script>
-  <script src="{% static "/static/vendors/datatables.net-scroller/js/dataTables.scroller.min.js" %}"></script>
-  <script src="{% static "/static/vendors/jszip/dist/jszip.min.js" %}"></script>
-  <script src="{% static "/static/vendors/pdfmake/build/pdfmake.min.js" %}"></script>
-  <script src="{% static "/static/vendors/pdfmake/build/vfs_fonts.js" %}"></script>
+    {{ block.super }}
+    <!-- Datatables -->
+    <script src="{% static "/static/vendors/datatables.net/js/jquery.dataTables.min.js" %}"></script>
+    <script src="{% static "/static/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js" %}"></script>
+    <script src="{% static "/static/vendors/datatables.net-buttons/js/dataTables.buttons.min.js" %}"></script>
+    <script src="{% static "/static/vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js" %}"></script>
+    <script src="{% static "/static/vendors/datatables.net-buttons/js/buttons.flash.min.js" %}"></script>
+    <script src="{% static "/static/vendors/datatables.net-buttons/js/buttons.html5.min.js" %}"></script>
+    <script src="{% static "/static/vendors/datatables.net-buttons/js/buttons.print.min.js" %}"></script>
+    <script src="{% static "/static/vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js" %}"></script>
+    <script src="{% static "/static/vendors/datatables.net-keytable/js/dataTables.keyTable.min.js" %}"></script>
+    <script src="{% static "/static/vendors/datatables.net-responsive/js/dataTables.responsive.min.js" %}"></script>
+    <script src="{% static "/static/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js" %}"></script>
+    <script src="{% static "/static/vendors/datatables.net-scroller/js/dataTables.scroller.min.js" %}"></script>
+    <script src="{% static "/static/vendors/jszip/dist/jszip.min.js" %}"></script>
+    <script src="{% static "/static/vendors/pdfmake/build/pdfmake.min.js" %}"></script>
+    <script src="{% static "/static/vendors/pdfmake/build/vfs_fonts.js" %}"></script>
+
+    <!-- Bokeh Graphs -->
+    <script src="http://cdn.pydata.org/bokeh/release/bokeh-0.12.15.min.js"></script>
+    <script src="http://cdn.pydata.org/bokeh/release/bokeh-widgets-0.12.15.min.js"></script>
 {% endblock javascripts %}
 
 {% block stylesheets %}
-  {{ block.super }}
-  <link href="{% static "/static/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" %}" rel="stylesheet">
-  <link href="{% static "/static/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" %}" rel="stylesheet">
-  <link href="{% static "/static/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" %}" rel="stylesheet">
-  <link href="{% static "/static/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" %}" rel="stylesheet">
-  <link href="{% static "/static/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" %}" rel="stylesheet">
+    {{ block.super }}
+    <link href="{% static "/static/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" %}" rel="stylesheet">
+    <link href="{% static "/static/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" %}" rel="stylesheet">
+    <link href="{% static "/static/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" %}" rel="stylesheet">
+    <link href="{% static "/static/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" %}" rel="stylesheet">
+    <link href="{% static "/static/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" %}" rel="stylesheet">
+
+    <!-- Bokeh Graphs -->
+    <link rel="stylesheet" href="http://cdn.pydata.org/bokeh/release/bokeh-0.12.0.min.css">
+    <link href="http://cdn.pydata.org/bokeh/release/bokeh-widgets-0.12.0.min.css" rel="stylesheet" type="text/css">
+    <link href="http://cdn.pydata.org/bokeh/release/bokeh-0.12.0.min.css" rel="stylesheet" type="text/css">
+    <link href="http://cdn.pydata.org/bokeh/release/bokeh-widgets-0.12.0.min.css" rel="stylesheet" type="text/css">
 {% endblock stylesheets %}

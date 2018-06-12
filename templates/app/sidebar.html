@@ -2,7 +2,7 @@
 
 <div class="left_col scroll-view">
   <div class="navbar nav_title" style="border: 0;">
-    <a href="{% url 'medios:index' %}" class="site_title"><i class="fa fa-spinner"></i> <span>Test Medios Twitter</span></a>
+    <a href="{% url 'medios:bokeh_test' %}" class="site_title"><i class="fa fa-spinner"></i> <span>Test Medios Twitter</span></a>
   </div>
 
   <div class="clearfix"></div>
@@ -28,8 +28,6 @@
       <ul class="nav side-menu">
         <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
           <ul class="nav child_menu">
-              <li><a href="{% url "medios:tweet_index" %}">Tweet Index</a></li>
-
               <li><a href="{% url 'medios:bokeh_test' %}" >Bokeh Test</a></li>
               <li><a href="{% url "medios:tweet_bokeh" %}">Bokeh Tweets</a></li>
               <li><a href="{% url "medios:grafica_palabra" %}">Contador Palabras</a></li>
