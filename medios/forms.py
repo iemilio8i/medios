@@ -12,3 +12,7 @@ class ListaAparicionForm(forms.Form):
     numero_resultados = forms.IntegerField(min_value=1, max_value=20)
     fecha_inicio = forms.DateField(input_formats=['%d/%m/%Y'], initial=datetime.date.today)
     fecha_final = forms.DateField(input_formats=['%d/%m/%Y'], initial=datetime.date.today)
+
+class SubirArchivoForm(forms.Form):
+    nombre_medio = forms.CharField(max_length=100)
+    archivo_json = forms.FileField()

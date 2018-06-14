@@ -5,16 +5,33 @@ from django.views import generic
 from django.utils import timezone
 
 import datetime
+from threading import Thread
 
 # Graphs
 from utils.graph import test_pie_chart, test_graph, n_words_graph, linear_plot, mean_linear_plot, locations_graph
+from utils.mongodb import json_upload_to_collection
 
-
-from .forms import ListaAparicionForm
+from .forms import ListaAparicionForm, SubirArchivoForm
 from .models import Choice, Question
 
 from utils.tweet_test import filtrar_df_fecha,\
         buscar_palabra_df, n_palabras_comun, uniq_usuarios_df, filtrar_df_user, procces_data
+
+def subir_archivo(request):
+    form_title = 'Subir Medio'
+    if request.method == 'POST':
+        form = SubirArchivoForm(request.POST, request.FILES)
+        if form.is_valid():
+            nombre_medio = form.cleaned_data['nombre_medio']
+            file = request.FILES['archivo_json']
+            if file.name.endswith('.json'):
+                subido = json_upload_to_collection(file, nombre_medio)
+            else:
+                subido = 'Error: El archivo no es json'
+            return render(request, 'medios/subir_archivo.html', {'form': form, 'form_title':form_title,'subido':subido,})
+    else:
+        form = SubirArchivoForm()
+    return render(request, 'medios/subir_archivo.html', {'form': form, 'form_title':form_title,})
 
 
 # Test: Plot pie chart
@@ -112,15 +129,29 @@ def medio_index_get_medio(df, medio_id):
 
 # Medio Overview, generates a bunch of bokeh graphs and returns context to show it
 def medio_index_overview(df):
-    linear_script, linear_div = linear_plot(df[['created_at', 'retweet_count']])
-    mean_script, mean_div = mean_linear_plot(df[['created_at', 'retweet_count']])
-    # N words plot
-    n_script, n_div = n_words_graph(df[['created_at', 'text']], 5, 'text')
+    # Start a thread for every graph
+    linear_resul = [None]*2
+    t_linear = Thread(target=linear_plot, args=(df[['created_at', 'retweet_count']],linear_resul))
+    t_linear.start()
+
+    mean_linear_resul = [None] * 2
+    mean_t_linear = Thread(target=mean_linear_plot, args=(df[['created_at', 'retweet_count']], mean_linear_resul))
+    mean_t_linear.start()
+
+    n_words_resul = [None] * 2
+    n_words_t = Thread(target=n_words_graph, args=(df[['created_at', 'text']], 5, 'text', n_words_resul))
+    n_words_t.start()
 
     loca_list = list(df['user_location'])
-    location_script, location_div = locations_graph(loca_list, 5)
+    location_resul = [None] * 2
+    location_t = Thread(target=locations_graph, args=(loca_list, 5, location_resul))
+    location_t.start()
 
-    return linear_script, linear_div, mean_script, mean_div, n_script, n_div, location_script, location_div
+    pie_chart_resul = [None] * 2
+    pie_chart_t = Thread(target=test_pie_chart, args=(df, pie_chart_resul))
+    pie_chart_t.start()
+
+    return t_linear, mean_t_linear, n_words_t, location_t, pie_chart_t, linear_resul, mean_linear_resul, n_words_resul, location_resul, pie_chart_resul
 
 
 def overview_context(df):
@@ -149,12 +180,9 @@ def medio_index(request, medio_id='7996082'):
     mean_title = 'Media de Retweets por Hora'
     n_title = 'Palabras más frecuentes'
     location_title = 'Localizaciones'
-    linear_script, linear_div, mean_script, mean_div, n_script, n_div, location_script, location_div = medio_index_overview(df)
     pie_title = 'Hashtags más utilizados'
-    pie_script, pie_div = test_pie_chart(df)
 
-
-
+    t_linear, mean_t_linear, n_words_t, location_t, pie_chart_t, linear_resul, mean_linear_resul, n_words_resul, location_resul, pie_chart_resul = medio_index_overview(df)
 
     over_context = overview_context(df)
     over_context['rest_tweets']-= n_medio_tweets
@@ -162,6 +190,20 @@ def medio_index(request, medio_id='7996082'):
     # Tweet list tab proccesing
     df_list = medio_index_tweets_tab(df)
     uniq_users = len(set(df['user_screen_name']))
+
+    # Wait for every thread to finish his jon
+    t_linear.join()
+    mean_t_linear.join()
+    n_words_t.join()
+    location_t.join()
+    pie_chart_t.join()
+
+    # Assign resuls to respective return values
+    location_script, location_div = location_resul
+    linear_script, linear_div = linear_resul
+    mean_script, mean_div = mean_linear_resul
+    n_script, n_div = n_words_resul
+    pie_script, pie_div = pie_chart_resul
 
     context = {
         'tweet_list':df_list,

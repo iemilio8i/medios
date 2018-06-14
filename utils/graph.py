@@ -10,7 +10,7 @@ from math import log, sqrt
 
 
 # Test Pie Chart with Bokeh
-def test_pie_chart(df_bueno, plot_width=400, plot_height=400, most_common=5):
+def test_pie_chart(df_bueno, pie_chart_resul, plot_width=400, plot_height=400, most_common=5):
 
 
     p = figure(plot_width=plot_width, plot_height=plot_height, title="",
@@ -77,8 +77,8 @@ def test_pie_chart(df_bueno, plot_width=400, plot_height=400, most_common=5):
            text_font_size="9pt", text_align="center", text_baseline="middle")
 
     # Store Components
-    script, div = components(p)
-    return script, div
+    pie_chart_resul[0], pie_chart_resul[1] = components(p)
+
 
 def pie_chart(percents):
     # define starts/ends for wedges from percentages of a circle
@@ -113,7 +113,7 @@ def test_graph(df, title='Test Title', x_axis_label='X-Asis-Test', y_axis_label=
     return script, div
 
 
-def n_words_graph(df, n, column):
+def n_words_graph(df, n, column, n_words_resul):
     counter = n_palabras_comun(df, n, column=column)
     categorias = [ x[0] for x in counter ]
     top = [ x[1] for x in counter ]
@@ -123,10 +123,10 @@ def n_words_graph(df, n, column):
     plot.toolbar.logo = None
     plot.toolbar_location = None
     #Store Components
-    script, div = components(plot)
-    return script, div
+    n_words_resul[0], n_words_resul[1] = components(plot)
 
-def locations_graph(list, n):
+
+def locations_graph(list, n, location_resul):
     counter = count_locations(list, n)
     categorias = [ x[0] for x in counter ]
     top = [ x[1] for x in counter ]
@@ -135,10 +135,9 @@ def locations_graph(list, n):
     plot.toolbar.logo = None
     plot.toolbar_location = None
     #Store Components
-    script, div = components(plot)
-    return script, div
+    location_resul[0],location_resul[1] = components(plot)
 
-def linear_plot(df):
+def linear_plot(df, linear_resul):
     plot_data = group_by_date(df, freq='H', column='')
     plot_data = plot_data.count()
 
@@ -151,10 +150,11 @@ def linear_plot(df):
     p.toolbar.logo = None
     p.toolbar_location = None
 
-    script, div = components(p)
-    return script, div
+    linear_resul[0], linear_resul[1] = components(p)
 
-def mean_linear_plot(df):
+
+
+def mean_linear_plot(df, mean_linear_resul):
     plot_data = group_by_date(df, freq='H').mean().fillna(0)
 
     x_axis_values = list(plot_data.keys())
@@ -166,8 +166,7 @@ def mean_linear_plot(df):
     p.toolbar.logo = None
     p.toolbar_location = None
 
-    script, div = components(p)
-    return script, div
+    mean_linear_resul[0], mean_linear_resul[1] = components(p)
 
 
 def main():

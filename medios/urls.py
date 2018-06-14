@@ -6,6 +6,7 @@ from . import views
 
 app_name = 'medios'
 urlpatterns = [
+    path('subir-archivo', views.subir_archivo, name='subir_archivo'),
 
     # Test
     path('form/', TemplateView.as_view(template_name='app/form.html'), name='form'),
