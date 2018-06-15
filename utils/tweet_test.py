@@ -1,7 +1,11 @@
-import json, os, sys
+import json, os, sys, random
 import pandas as pd
 from datetime import datetime
 from collections import Counter
+from utils.mongodb import consulta_medio_fecha, limpiar_nombre_medio
+
+
+
 
 
 # Busca palabra en tweet_df
@@ -12,6 +16,21 @@ def buscar_palabra(tweet_df, palabra):
 
 # Busca usuario en tweet_df
 def buscar_usuario(tweet_df, usuario):
+    resul = []
+    clean_usuario = limpiar_nombre_medio(usuario)
+    for i in range(10):
+        len_resul = len(resul)
+        rand_int = random.randrange(tweet_df.shape[0])
+        tweet = tweet_df.iloc[rand_int]
+        for mention in tweet['entities']['user_mentions']:
+            clean_mention = limpiar_nombre_medio(mention['name'])
+            if clean_mention in clean_usuario or clean_usuario in clean_mention:
+                resul.append(mention['id_str'])
+        if len(resul) == len_resul:
+            clean_tweet_user = limpiar_nombre_medio(tweet['user_name'])
+            if clean_tweet_user in clean_usuario or clean_usuario in clean_tweet_user:
+                resul.append(tweet['user_id_str'])
+    print(resul)
     return
 
 # Recibe tweets[] y intervalo = datetime(fechainicio, fechafinal)?-> saca tweets que se encuentran en esa fecha(orden ascendente)
@@ -93,6 +112,11 @@ def leer_stopwords():
         json_data = json.load(json_file)
     return  json_data
 
+
+def buscar_medio_user(df, medio_nombre):
+    return
+
+
 def clean_entities(dentity):
     # Delete not required fields from entity
     dentity.pop('symbols', None)
@@ -135,7 +159,7 @@ def user_dict_to_df(df):
     return df
 
 # Procesa json a DF actualmente recibe path luego habra k añadir mongodb
-def procces_data(path='F:\Desktop\TFG\Medios_Emilio\ELPAIS.json'):
+def procces_data_json(path='F:\Desktop\TFG\Medios_Emilio\ELPAIS.json'):
     df = pd.read_json(path, encoding='utf-8')
     # Mirar user y entities
     df = df [[
@@ -158,11 +182,35 @@ def procces_data(path='F:\Desktop\TFG\Medios_Emilio\ELPAIS.json'):
     df = user_dict_to_df(df)
     return df
 
+# Procesa json a DF actualmente recibe path luego habra k añadir mongodb
+def procces_data_db(medio='ELPAIS'):
+    df = pd.DataFrame(list(consulta_medio_fecha(medio)))
+    # Mirar user y entities
+    df = df [[
+        'text',
+        'id_str',
+        'created_at',
+        'in_reply_to_status_id_str',
+        'in_reply_to_user_id_str',
+        'in_reply_to_screen_name',
+        'retweet_count',
+        'favorite_count',
+        'entities',
+        'user',
+    ]]
+    df['created_at'] = pd.to_datetime(df['created_at'])
+
+    df['hashtags'] = df['entities'].apply(lambda x: [ y['text'] for y in  x['hashtags']])
+    # Procces entities fields
+    df['entities'] = df['entities'].apply(clean_entities)
+    # Procces user fields
+    df = user_dict_to_df(df)
+    return df
 
 
 def main():
     path = 'F:\Desktop\TFG\Medios_Emilio\ELPAIS.json'
-    df = procces_data(path)
+    df = procces_data_db()
     print(df)
 
 

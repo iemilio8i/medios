@@ -15,7 +15,7 @@ from .forms import ListaAparicionForm, SubirArchivoForm
 from .models import Choice, Question
 
 from utils.tweet_test import filtrar_df_fecha,\
-        buscar_palabra_df, n_palabras_comun, uniq_usuarios_df, filtrar_df_user, procces_data
+        buscar_palabra_df, n_palabras_comun, uniq_usuarios_df, filtrar_df_user, procces_data_db
 
 def subir_archivo(request):
     form_title = 'Subir Medio'
@@ -43,7 +43,7 @@ def index(request):
 
 
 def bokeh_prueba_tweet(request):
-    df = procces_data()
+    df = procces_data_db()
 
     script, div = test_graph(df)
 
@@ -57,7 +57,7 @@ def grafica_palabras(request, n=10, column='text', titulo='Gráfica Palabras má
     initial = { 'tipo_busqueda': column, 'numero_resultados':n, 'fecha_inicio': fecha1, 'fecha_final':fecha2 }
     form = ListaAparicionForm(initial=initial)
 
-    df = procces_data()
+    df = procces_data_db()
     df = filtrar_df_fecha(df, fecha1, fecha2)
     script, div = n_words_graph(df, n, column)
     # Feed them to the Django Template.
@@ -172,7 +172,7 @@ def overview_context(df):
 def medio_index(request, medio_id='7996082'):
     # TODO: Extraer datos de cada medio importante
     # El Pais User ID: 7996082 Tweet con el pais:2521
-    df = procces_data('F:\Desktop\TFG\Medios_Emilio\ELPAIS.json')
+    df = procces_data_db()
     medio, medio_user, imagen_medio, medio_tweet, n_medio_tweets = medio_index_get_medio(df, medio_id)
 
     # Overview
@@ -207,7 +207,7 @@ def medio_index(request, medio_id='7996082'):
 
     context = {
         'tweet_list':df_list,
-        'titulo':medio,
+        'titulo': medio,
         'medio':medio_user,
         'imagen_medio':imagen_medio,
         'medio_tweet': medio_tweet,

@@ -4,7 +4,7 @@
         <!--<div class="jumbotron">-->
             <div class="col-md-4 col-sm-9 col-xs-9">
                 <h2>
-                    <object data="{{ imagen_medio }}" type="image/jpg">
+                    <object data="{{ imagen_medio | safe }}" type="image/jpg">
                     <img src="{% static "medios/images/default_user.png" %}">
                     </object>
                 </h2>
@@ -12,18 +12,18 @@
             <div class="col-md-4 col-sm-9 col-xs-9">
                 <h2>
                     Usuario:
-                    {% if medio_tweet.user_verified %}
+                    {% if medio_tweet.user_verified  %}
                         <img src="{% static "medios/images/verified.svg" %}" alt="My image"/>
                     {% endif %}
-                    <a href="https://twitter.com/{{ medio_tweet.user_screen_name }}">@{{  medio_tweet.user_screen_name }}</a>
+                    <a href="https://twitter.com/{{ medio_tweet.user_screen_name | safe }}">@{{  medio_tweet.user_screen_name | safe }}</a>
                 </h2>
-                <h2>Descripcion:</h2> <p>{{ medio_tweet.user_description }}</p>
-                <h2>Localización:</h2> <p>{{ medio_tweet.user_location }}</p>
+                <h2>Descripcion:</h2> <p>{{ medio_tweet.user_description | safe }}</p>
+                <h2>Localización:</h2> <p>{{ medio_tweet.user_location | safe }}</p>
             </div>
             <div class="col-md-4 col-sm-9 col-xs-9">
-                <h2>Seguidores:</h2> <p>{{ medio_tweet.user_followers_count }}</p>
-                <h2>Siguiendo:</h2> <p>{{ medio_tweet.user_friends_count }}</p>
-                <h2>Fecha creación:</h2> <p>{{ medio_tweet.user_created_at }}</p>
+                <h2>Seguidores:</h2> <p>{{ medio_tweet.user_followers_count | safe }}</p>
+                <h2>Siguiendo:</h2> <p>{{ medio_tweet.user_friends_count | safe }}</p>
+                <h2>Fecha creación:</h2> <p>{{ medio_tweet.user_created_at | safe }}</p>
             </div>
         <!--</div>-->
     </div>

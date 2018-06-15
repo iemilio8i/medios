@@ -21,10 +21,10 @@
             <tr role="row" class="even">
         {% endif %}
             <td class=""><a href="https://twitter.com/{{ tweet.0 }}">{{ tweet.1 }}</a></td>
-            <td class="sorting_1"><a href= href="https://twitter.com/statuses/"{{ tweet.2 }}>{{ tweet.3|make_list|slice:':60'|join:'' }}...</a></td>
-            <td>{{ tweet.4 }}</td>
-            <td>{{ tweet.5 }}</td>
-            <td>{{ tweet.6 }}</td>
+            <td class="sorting_1"><a href= href="https://twitter.com/statuses/"{{ tweet.2 | safe }}>{{ tweet.3|make_list|slice:':60'|join:''}}...</a></td>
+            <td>{{ tweet.4 | safe }}</td>
+            <td>{{ tweet.5 | safe }}</td>
+            <td>{{ tweet.6 | safe }}</td>
             </tr>
     {% endfor %}
     </tbody>

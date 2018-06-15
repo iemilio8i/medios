@@ -1,4 +1,4 @@
-import pymongo, tweepy, json, datetime
+import pymongo, tweepy, json, datetime, unidecode, re
 import pymongo.errors
 from tweepy.auth import OAuthHandler
 from bson import json_util
@@ -57,6 +57,14 @@ def setup_listener(MEDIOS):
     streamer = tweepy.Stream(auth=auth, listener=listener)
     print("Tracking: " + str(MEDIOS))
     streamer.filter(track=MEDIOS)
+
+
+def limpiar_nombre_medio(nombre):
+    nombre = nombre.lower()
+    nombre = unidecode.unidecode(nombre)
+    pattern = re.compile('[\W_]+')
+    return pattern.sub('', nombre)
+
 
 
 def test_connection():
@@ -137,9 +145,9 @@ def json_upload_to_collection(file, medio_name):
 
 
 
-        collection_name=medio_name.lower()
+        collection_name=limpiar_nombre_medio(medio_name)
         for collection in db.collection_names():
-            original = medio_name.lower()
+            original = collection_name
             if collection == original  or original in collection or collection in original:
                 collection_name = collection
                 break
@@ -166,6 +174,7 @@ def json_file_to_collection(path, collection_name):
 
         client.server_info() # Saca error si no conecta
 
+        collection_name = limpiar_nombre_medio(collection_name)
         json_data = open(path, encoding='utf-8').read()
         data = json_util.loads(json_data)
 
@@ -186,6 +195,7 @@ def json_file_to_collection(path, collection_name):
 
 def update_medio(user, medio, fecha):
     try:
+        medio = limpiar_nombre_medio(medio)
         client = pymongo.MongoClient(serverSelectionTimeoutMS=1)  # default ('localhost', 27017)
 
         client.server_info()  # Saca error si no conecta
@@ -210,9 +220,8 @@ def folder_json(folder_path):
     onlyfiles = [f for f in listdir(folder_path) if isfile(join(folder_path, f))]
     json_files = [ f for f in onlyfiles if not f.endswith('2000.json')]
     nombres = [ f.replace('.json','') for f in json_files ]
-    print(nombres)
     for i,f in enumerate(json_files):
-        json_file_to_collection(folder_path+'/'+f, nombres[i].lower())
+        json_file_to_collection(folder_path+'/'+f, limpiar_nombre_medio(nombres[i]))
 
 # Sacar lista de medios a partir del nombre de las collecciones
 def get_medios_list():
@@ -226,26 +235,26 @@ def get_medios_list():
     except pymongo.errors.ServerSelectionTimeoutError as err:
         print(err)
 
-def consulta_medio_fecha(medio_collection, fecha_i, fecha_f=datetime.datetime.now()):
+def consulta_medio_fecha(medio_collection, fecha_i=datetime.datetime(2010, 2, 15), fecha_f=datetime.datetime.now()):
     try:
         client = pymongo.MongoClient(serverSelectionTimeoutMS=1)  # default ('localhost', 27017)
         client.server_info() # Saca error si no conecta
         db = client.tweet_test_db
+        medio_collection = limpiar_nombre_medio(medio_collection)
+        db.collection_names()
         # Limpiar lista
         collection = db[medio_collection]
         fecha_i = fecha_i.strftime('%Y-%m-%d %H:%M:%S')
         fecha_f = fecha_f.strftime('%Y-%m-%d %H:%M:%S')
         cursor = collection.find( {'created_at': {'$lt': fecha_f, '$gte': fecha_i}} )
-
-        return len(list(cursor))
+        return list(cursor)
 
     except pymongo.errors.ServerSelectionTimeoutError as err:
         print(err)
 
 
-
 def main():
-    test_connection()
+    #test_connection()
     folder_path = 'F:\Desktop\TFG\Medios_Emilio'
     #folder_json(folder_path)
     MEDIOS = ['elpais_espana']
@@ -255,7 +264,8 @@ def main():
     #fecha_i = datetime.datetime(2016, 2, 15)
     #fecha_f = datetime.datetime(2016, 2, 16)
     #print(consulta_medio_fecha('ELPAIS', fecha_i, fecha_f))
-
+    #print(consulta_medio_fecha('ELPAIS'))
+    limpiar_nombre_medio('El_País')
 
 if __name__ == '__main__':
     main()
