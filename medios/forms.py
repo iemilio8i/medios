@@ -16,3 +16,10 @@ class ListaAparicionForm(forms.Form):
 class SubirArchivoForm(forms.Form):
     nombre_medio = forms.CharField(max_length=100)
     archivo_json = forms.FileField()
+
+class BuscarMedioForm(forms.Form):
+    nombre_medio = forms.CharField(max_length=100)
+
+class FiltrarFechaForm(forms.Form):
+    fecha_inicial = forms.DateField(widget=forms.SelectDateWidget(years=range(2000, datetime.datetime.now().year+1)))
+    fecha_final = forms.DateField(widget=forms.SelectDateWidget(years=range(2000, datetime.datetime.now().year+1)))

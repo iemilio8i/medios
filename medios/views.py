@@ -9,16 +9,47 @@ from threading import Thread
 
 # Graphs
 from utils.graph import test_pie_chart, test_graph, n_words_graph, linear_plot, mean_linear_plot, locations_graph
-from utils.mongodb import json_upload_to_collection
+from utils.mongodb import json_upload_to_collection, update_medio, get_collection_list, get_medios_destacados, sacar_intervalo_fecha
 
-from .forms import ListaAparicionForm, SubirArchivoForm
+from .forms import ListaAparicionForm, SubirArchivoForm, BuscarMedioForm, FiltrarFechaForm
 from .models import Choice, Question
 
 from utils.tweet_test import filtrar_df_fecha,\
-        buscar_palabra_df, n_palabras_comun, uniq_usuarios_df, filtrar_df_user, procces_data_db
+        buscar_palabra_df, n_palabras_comun, uniq_usuarios_df, filtrar_df_user, procces_data_db, sacar_df_y_user_medio
 
-def subir_archivo(request):
+
+def lista_medios(request):
+    list_title = 'Medios de Comunicación'
+    table_title = 'Resumen Medios'
+    lista_medio_count = get_collection_list()
+    lista_medio = [ x[0] for x in lista_medio_count]
+    lista_count = [ x[1] for x in lista_medio_count]
+    lista_medios_destacados = get_medios_destacados()[:5]
+    max_tweets_medio = max(lista_count)
+
+    intervalo_medio = []
+    for medio in lista_medio:
+        fecha_i, fecha_f = sacar_intervalo_fecha(medio)
+        intervalo_medio.append((fecha_i, fecha_f))
+
+    lista_medio = [ [lista_medio[i], lista_count[i], intervalo_medio[i]] for i in range(len(lista_medio)) ]
+
+    table_head = [('Medio',20), ('algo',None), ('Tweets Almacenados',None), ('Ver Medio',None), ('Añadir Tweets', 20)]
+
+
+    return render(request, 'medios/lista_medios.html', {
+                'table_title':table_title,
+                'list_title':list_title,
+                'lista_medios':lista_medio,
+                'lista_medios_destacados':lista_medios_destacados,
+                'max_tweets_medio':max_tweets_medio,
+                'table_head':table_head,
+                })
+
+def subir_archivo(request, medio_nombre=''):
     form_title = 'Subir Medio'
+    lista_medios_destacados = get_medios_destacados()[:5]
+
     if request.method == 'POST':
         form = SubirArchivoForm(request.POST, request.FILES)
         if form.is_valid():
@@ -26,13 +57,15 @@ def subir_archivo(request):
             file = request.FILES['archivo_json']
             if file.name.endswith('.json'):
                 subido = json_upload_to_collection(file, nombre_medio)
+                df, user = sacar_df_y_user_medio(nombre_medio)
+                if user:
+                    update_medio(user, nombre_medio)
             else:
                 subido = 'Error: El archivo no es json'
-            return render(request, 'medios/subir_archivo.html', {'form': form, 'form_title':form_title,'subido':subido,})
+            return render(request, 'medios/subir_archivo.html', {'form': form, 'form_title':form_title,'subido':subido, 'lista_medios_destacados':lista_medios_destacados,})
     else:
-        form = SubirArchivoForm()
-    return render(request, 'medios/subir_archivo.html', {'form': form, 'form_title':form_title,})
-
+        form = SubirArchivoForm(initial={'nombre_medio': medio_nombre})
+    return render(request, 'medios/subir_archivo.html', {'form': form, 'form_title':form_title, 'lista_medios_destacados':lista_medios_destacados, })
 
 # Test: Plot pie chart
 def index(request):
@@ -40,7 +73,6 @@ def index(request):
     script, div = test_pie_chart()
     # Feed them to the Django Template.
     return render(request, 'medios/bokeh_test.html', {'script' : script, 'div' : div } )
-
 
 def bokeh_prueba_tweet(request):
     df = procces_data_db()
@@ -50,7 +82,6 @@ def bokeh_prueba_tweet(request):
     titulo = 'Gráfica Número de Retweets por Día'
     # Feed them to the Django Template.
     return render(request, 'medios/bokeh_test.html', {'script' : script, 'div' : div, 'titulo': titulo } )
-
 
 def grafica_palabras(request, n=10, column='text', titulo='Gráfica Palabras más Frequentes', fecha1=datetime.date(2016,1,1) ,fecha2=datetime.date.today()):
 
@@ -62,7 +93,6 @@ def grafica_palabras(request, n=10, column='text', titulo='Gráfica Palabras má
     script, div = n_words_graph(df, n, column)
     # Feed them to the Django Template.
     return render(request, 'medios/bokeh_test.html', {'script' : script, 'div' : div, 'titulo': titulo, 'form':form } )
-
 
 def grafica_palabras_form(request):
     if request.method== 'POST':
@@ -91,41 +121,32 @@ def grafica_palabras_form(request):
     else: # Si es GET
         return grafica_palabras(request)
 
-
-
-# Pagina Indice de un medio de comunicacion con sus datos mas relevantes
-def index_medio(medio, df):
-    # TODO Se necesita una clara distinción de medios relevantes (lista de ellos)
-    user_df = filtrar_df_user(df, user=medio)
-    counter_hastags = sacar_hastags(user_df)
-    # TODO poner aqui gráfica de palabras Nota: Se debería excluir el nombre del medio
-    #
-    # TODO lista de ultimos tweets (incluir busqueda de tweets por fecha)
-    # TODO Idea: dividir lista de tweets entre tweets propios y menciones/RTs
-    # TODO Mirar clasificacion de medios por categorias (deporte, politica...)
-    return
-
-
 # Submethod of medio index for managing list of tweets
 def medio_index_tweets_tab(df):
     modified_df = df[['user_screen_name', 'user_name', 'id_str', 'text', 'retweet_count', 'favorite_count', 'created_at']]
     return modified_df.values.tolist()
 
 # Looks for medio in db and returns its data
-def medio_index_get_medio(df, medio_id):
-    # TODO MONGODB
-    # Tweet con el pais:2521
-    medio_tweet = df.loc[2521]
-    medio = medio_tweet['user_name']
-    medio_user = medio_tweet['user_screen_name']
-    #imagen_medio = 'http://pbs.twimg.com/profile_images/2284174872/7df3h38zabcvjylnyfe3_bigger.png'
-    imagen_medio = medio_tweet['user_profile_image_url']
-    imagen_medio = imagen_medio.replace('_normal', '_bigger')
-    medio_test_id = '1'
+def medio_index_get_medio(df, medio_tweet, nombre):
+    try:
+        medio = medio_tweet['user_name']
+        medio_user = medio_tweet['user_screen_name']
+        #imagen_medio = 'http://pbs.twimg.com/profile_images/2284174872/7df3h38zabcvjylnyfe3_bigger.png'
+        imagen_medio = medio_tweet['user_profile_image_url']
+        imagen_medio = imagen_medio.replace('_normal', '_bigger')
+        user_id_str = medio_tweet['user_id_str']
+        try:
+            n_medio_tweets = len(df.loc[df['user_id_str']==user_id_str ])
+        except Exception as e:
+            n_medio_tweets = 0
+        medio_dict = medio_tweet.to_dict()
+    except Exception as e:
+        medio, medio_user = nombre, nombre
+        imagen_medio = None
+        medio_dict = {}
+        n_medio_tweets = 0
 
-    n_medio_tweets = len(df.loc[df['user_id_str']==medio_id])
-
-    return medio, medio_user, imagen_medio, medio_tweet.to_dict(), n_medio_tweets
+    return medio, medio_user, imagen_medio, medio_dict, n_medio_tweets
 
 # Medio Overview, generates a bunch of bokeh graphs and returns context to show it
 def medio_index_overview(df):
@@ -153,7 +174,6 @@ def medio_index_overview(df):
 
     return t_linear, mean_t_linear, n_words_t, location_t, pie_chart_t, linear_resul, mean_linear_resul, n_words_resul, location_resul, pie_chart_resul
 
-
 def overview_context(df):
     info_title = 'Información Extra'
     n_reply_tweets = df.loc[df['in_reply_to_screen_name'].notnull()].shape[0]
@@ -169,11 +189,11 @@ def overview_context(df):
         'total_tweets': total_tweets,
         }
 
-def medio_index(request, medio_id='7996082'):
-    # TODO: Extraer datos de cada medio importante
-    # El Pais User ID: 7996082 Tweet con el pais:2521
-    df = procces_data_db()
-    medio, medio_user, imagen_medio, medio_tweet, n_medio_tweets = medio_index_get_medio(df, medio_id)
+def medio_index(request, medio_nombre='elpais', fecha_i=datetime.datetime(2010, 2, 15), fecha_f=datetime.datetime.now()):
+    tweet_user = None
+    df, tweet_user = sacar_df_y_user_medio(medio_nombre, fecha_i, fecha_f)
+    medio, medio_user, imagen_medio, medio_tweet, n_medio_tweets = medio_index_get_medio(df, tweet_user, medio_nombre)
+
 
     # Overview
     linear_title = 'Número de Tweets por Hora'
@@ -181,8 +201,41 @@ def medio_index(request, medio_id='7996082'):
     n_title = 'Palabras más frecuentes'
     location_title = 'Localizaciones'
     pie_title = 'Hashtags más utilizados'
+    lista_medios_destacados = get_medios_destacados()[:5]
 
-    t_linear, mean_t_linear, n_words_t, location_t, pie_chart_t, linear_resul, mean_linear_resul, n_words_resul, location_resul, pie_chart_resul = medio_index_overview(df)
+
+    context = {
+        'titulo': medio.title(),
+        'medio':medio_user.title(),
+        'imagen_medio':imagen_medio,
+        'medio_tweet': medio_tweet,
+        'n_medio_tweets':n_medio_tweets,
+        ## Overview
+        # Graph context
+        ##### Linear Graph
+        'linear_title':linear_title,
+
+        ##### Mean Linear Graph
+        'mean_title': mean_title,
+
+        ###### N Words Graph
+        'n_title': n_title,
+
+        ###### Pie chart Hastags
+        'pie_title': pie_title,
+
+        ###### Localizations
+        'location_title': location_title,
+
+        # FORMS
+        'buscarmedioform':BuscarMedioForm(),
+        'filtrarfechaform': FiltrarFechaForm(),
+        'lista_medios_destacados': lista_medios_destacados,
+    }
+    try:
+        t_linear, mean_t_linear, n_words_t, location_t, pie_chart_t, linear_resul, mean_linear_resul, n_words_resul, location_resul, pie_chart_resul = medio_index_overview(df)
+    except Exception as e:
+        return render(request, 'medios/medio_index.html', context)
 
     over_context = overview_context(df)
     over_context['rest_tweets']-= n_medio_tweets
@@ -207,8 +260,8 @@ def medio_index(request, medio_id='7996082'):
 
     context = {
         'tweet_list':df_list,
-        'titulo': medio,
-        'medio':medio_user,
+        'titulo': medio.title(),
+        'medio':medio_user.title(),
         'imagen_medio':imagen_medio,
         'medio_tweet': medio_tweet,
         'n_medio_tweets':n_medio_tweets,
@@ -236,7 +289,40 @@ def medio_index(request, medio_id='7996082'):
         'location_div': location_div,
         # Some info
         'uniq_users':uniq_users,
+        # FORMS
+        'buscarmedioform':BuscarMedioForm(),
+        'filtrarfechaform': FiltrarFechaForm(),
+        'lista_medios_destacados': lista_medios_destacados,
     }
     context = { **context, **over_context}
 
     return render(request,'medios/medio_index.html', context)
+
+def control_flow_medio_index(request, medio_nombre):
+    if request.method=="POST":
+        if 'buscarmedio' in request.POST:
+            buscarmedioform = BuscarMedioForm(request.POST, prefix='buscar')
+            try:
+                medio_nombre = buscarmedioform.data['nombre_medio']
+            except Exception as e:
+                print(e)
+            return HttpResponseRedirect(reverse('medios:medio_index', args=(medio_nombre,)))
+        elif 'filtrarfecha' in request.POST:
+            filtrarfechaform = FiltrarFechaForm(request.POST, prefix='filtrar')
+            try:
+                fecha_inicial_day = int(filtrarfechaform.data['fecha_inicial_day'])
+                fecha_inicial_month = int(filtrarfechaform.data['fecha_inicial_month'])
+                fecha_inicial_year = int(filtrarfechaform.data['fecha_inicial_year'])
+                fecha_final_day = int(filtrarfechaform.data['fecha_final_day'])
+                fecha_final_month = int(filtrarfechaform.data['fecha_final_month'])
+                fecha_final_year = int(filtrarfechaform.data['fecha_final_year'])
+                fecha_inicial = datetime.datetime(fecha_inicial_year, fecha_inicial_month, fecha_inicial_day)
+                fecha_final = datetime.datetime(fecha_final_year, fecha_final_month, fecha_final_day)
+            except Exception as e:
+                raise e
+            return medio_index(request, medio_nombre, fecha_inicial, fecha_final)
+
+        else:
+            return HttpResponseRedirect(reverse('medios:medio_index', args=(medio_nombre,)))
+    else:
+       return medio_index(request, medio_nombre)

@@ -3,13 +3,65 @@
 
 {% block content %}
 <div class="right_col" role="main">
-<div class="col-md-9 col-sm-6 col-xs-12">
-    <div class="x_panel">
-        <div class="x_title"><h3>{{ list_title }}hola</h3></div>
-        <div class="x_content">
-            la lista mi arma
+    <div class>
+        <div class="page-title">
+          <div class="title_left">
+            <h3>{{ list_title }}</h3>
+          </div>
+        </div>
+
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title"><h3>{{ table_title }}</h3></div>
+                <div class="x_content">
+                <table class="table table-striped projects">
+                    <thead>
+                        <tr>
+                            <th style="width: 1%">#</th>
+                            {% for head in table_head %}
+                            <th {% if head.1 %}style="width: {{ head.1 }}%"{% endif %}>{{ head.0 }}</th>
+                            {% endfor %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for medio in lista_medios %}
+                            <tr>
+                                <td>#</td>
+                                <td>
+                                    <a>{{ medio.0 }}</a>
+                                    <br>
+                                    <small>Intervalo datos de {{ medio.2.0 }} a {{ medio.2.1 }}</small>
+                                </td>
+                                <td>
+                                    <ul class="list-inline">
+
+                                    </ul>
+                                </td>
+                                <td class="project_progress">
+                                    <div class="progress progress_sm">
+                                    <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="{% widthratio medio.1 max_tweets_medio 100 %}" aria-valuenow="{% widthratio medio.1 max_tweets_medio 100 %}" style="width: {% widthratio medio.1 max_tweets_medio 100 %}%;"></div>
+                                    </div>
+                                    <small>{{ medio.1 }} tweets</small>
+                                </td>
+                                <td>
+                                    <a href="{% url 'medios:medio_index' medio.0 %}" class="btn btn-primary btn-xs"><i class="fa fa-link"></i> Enlace</a>
+                                </td>
+                                <td>
+                                    <a href="{% url 'medios:subir_archivo' medio.0 %}" class="btn btn-info btn-xs"><i class="fa fa-folder"></i> Subir Archivo </a>
+                                    <!--<a href="#" class="btn btn-success btn-xs"><i class="fa fa-pencil"></i> Edit </a>
+                                    <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>btn btn-primary btn-xs-->
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+                </div>
+            </div>
+
+
+
         </div>
     </div>
-</div>
 </div>
 {% endblock content %}

@@ -1,6 +1,7 @@
 {% extends "app/base_site.html" %}
 {% load static %}
 
+
 {%  block title %}Índice Medio{% endblock %}
 
 
@@ -10,16 +11,19 @@
             <!-- Titulo -->
             <div class="page-title">
               <div class="title_left">
-                <h3>Índice de Medio</h3>
+                <h3>Índice de {% if titulo %} {{ titulo }} {% else %} Medio {% endif %}</h3>
               </div>
               <div class="title_right">
                 <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-                  <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Introduzca medio...">
-                    <span class="input-group-btn">
-                      <button class="btn btn-default" type="button">Buscar</button>
-                    </span>
-                  </div>
+                    <form method="post">
+                    {% csrf_token %}
+                      <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Introduzca medio..." name="nombre_medio"  maxlength="100" required id="id_nombre_medio" >
+                        <span class="input-group-btn">
+                          <button class="btn btn-default" type="submit" name="buscarmedio">Buscar</button>
+                        </span>
+                      </div>
+                    </form>
                 </div>
               </div>
             </div>
@@ -29,14 +33,23 @@
                 <!-- Panel -->
                 <div class="x_panel">
                     <!-- Titulo Panel -->
-                    <div class="x_title" style="border-bottom: none"><h2>{% if titulo %} {{ titulo }} {% else %} Medio {% endif %}</h2></div>
-                    <!--<h2><i class="fa fa-bars"></i> Tabs <small>Float left</small></h2>
-                    <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                      </li>
-                    </ul>
-                  </div>-->
+                    <div class="x_title" style="border-bottom: none"><h2>{% if titulo %} {{ titulo }} {% else %} Medio {% endif %}</h2>
+                    {% if filtrarfechaform %}
+                        <form method="post">
+                            {% csrf_token %}
+                            <div class="col-md-4 col-sm-4 col-xs-12 form-group pull-right top_search">
+                                <div class="row">
+                                    <h4>Filtrar por Fecha</h4>
+                                    {{ filtrarfechaform }}
+                                </div>
+                                <div class="row">
+                                <button class="btn btn-default" type="submit" name="filtrarfecha" style="float: right;">Filtrar</button>
+                                </div>
+                            </div>
 
+                        </form>
+                    {% endif %}
+                    </div>
                     <!-- Contenido Panel -->
                     <div class="x_content">
 

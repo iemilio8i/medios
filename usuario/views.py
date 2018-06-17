@@ -26,7 +26,7 @@ def registrar(request):
         if f.is_valid():
             f.save()
             messages.success(request, 'Cuenta creada')
-            return HttpResponseRedirect(reverse('usuario:registrar'))
+            return HttpResponseRedirect(reverse('usuario:login'))
 
     else:
         f = CustomUserCreationForm()

@@ -58,14 +58,11 @@ def setup_listener(MEDIOS):
     print("Tracking: " + str(MEDIOS))
     streamer.filter(track=MEDIOS)
 
-
 def limpiar_nombre_medio(nombre):
     nombre = nombre.lower()
     nombre = unidecode.unidecode(nombre)
     pattern = re.compile('[\W_]+')
     return pattern.sub('', nombre)
-
-
 
 def test_connection():
 
@@ -126,7 +123,6 @@ def test_connection():
     sorted(list(db.profiles.index_information()))
     '''
 
-
 def json_upload_to_collection(file, medio_name):
     try:
         client = pymongo.MongoClient(serverSelectionTimeoutMS=1)  # default ('localhost', 27017)
@@ -142,8 +138,6 @@ def json_upload_to_collection(file, medio_name):
         index_name = 'nombre_medio'
         if index_name not in db.medios.index_information():
             db.medios.create_index(index_name, unique=True)
-
-
 
         collection_name=limpiar_nombre_medio(medio_name)
         for collection in db.collection_names():
@@ -193,7 +187,8 @@ def json_file_to_collection(path, collection_name):
     except pymongo.errors.ServerSelectionTimeoutError as err:
         print(err)
 
-def update_medio(user, medio, fecha):
+def update_medio(user, medio):
+    fecha = user['created_at']
     try:
         medio = limpiar_nombre_medio(medio)
         client = pymongo.MongoClient(serverSelectionTimeoutMS=1)  # default ('localhost', 27017)
@@ -203,7 +198,12 @@ def update_medio(user, medio, fecha):
         db = client.tweet_test_db
         medios = db['medios']
 
-        medio_db = medios.find_one({ 'nombre_medio': medio })
+        consulta_medio_db = medios.find()
+        medio_db =  None
+        for aux_medio_db in list(consulta_medio_db):
+            if limpiar_nombre_medio(aux_medio_db) in medio or medio in limpiar_nombre_medio(aux_medio_db):
+                medio_db = aux_medio_db
+                break
         try:
             if medio_db['fecha'] < fecha:
                 medio_db.update({'user': user, 'fecha': fecha})
@@ -215,7 +215,6 @@ def update_medio(user, medio, fecha):
     except pymongo.errors.ServerSelectionTimeoutError as err:
         print(err)
 
-
 def folder_json(folder_path):
     onlyfiles = [f for f in listdir(folder_path) if isfile(join(folder_path, f))]
     json_files = [ f for f in onlyfiles if not f.endswith('2000.json')]
@@ -224,13 +223,67 @@ def folder_json(folder_path):
         json_file_to_collection(folder_path+'/'+f, limpiar_nombre_medio(nombres[i]))
 
 # Sacar lista de medios a partir del nombre de las collecciones
-def get_medios_list():
+def get_collection_list():
     try:
         client = pymongo.MongoClient(serverSelectionTimeoutMS=1)  # default ('localhost', 27017)
         client.server_info() # Saca error si no conecta
         db = client.tweet_test_db
         # Limpiar lista
-        return list(db.collection_names())
+        resul = []
+        for collection in list(db.collection_names()):
+            consulta = db[collection].find()
+            resul.append((collection, consulta.count()))
+        resul = sorted(resul, reverse=True, key=lambda tup: tup[1])
+        return resul
+
+    except pymongo.errors.ServerSelectionTimeoutError as err:
+        print(err)
+
+# Sacar lista de medios a partir del nombre de las collecciones
+def get_medios_destacados():
+    try:
+        client = pymongo.MongoClient(serverSelectionTimeoutMS=1)  # default ('localhost', 27017)
+        client.server_info() # Saca error si no conecta
+        db = client.tweet_test_db
+        # Limpiar lista
+        resul = []
+        for collection in list(db.collection_names()):
+            consulta = db[collection].find()
+            resul.append((collection, consulta.count()))
+        resul = [x[0] for x in sorted(resul, reverse=True, key=lambda tup: tup[1])]
+        return resul
+
+    except pymongo.errors.ServerSelectionTimeoutError as err:
+        print(err)
+
+def get_medio_list():
+    try:
+        client = pymongo.MongoClient(serverSelectionTimeoutMS=1)  # default ('localhost', 27017)
+        client.server_info() # Saca error si no conecta
+        db = client.tweet_test_db
+        medio_db = db.medios.find()
+        print(medio_db.count())
+
+    except pymongo.errors.ServerSelectionTimeoutError as err:
+        print(err)
+
+def check_medio_in_medios(medio):
+    try:
+        client = pymongo.MongoClient(serverSelectionTimeoutMS=1)  # default ('localhost', 27017)
+        client.server_info() # Saca error si no conecta
+        db = client.tweet_test_db
+        # Limpiar lista
+        medio = limpiar_nombre_medio(medio)
+        if 'medios' in list(db.collection_names()):
+            medio_db = db.medios.find({'nombre_medio':medio})
+            if medio_db.count()>0:
+                for encontrado in list(medio_db):
+                    if 'user' in encontrado.keys():
+                        return encontrado['user']
+                    else:
+                        return False
+            else:
+                return False
 
     except pymongo.errors.ServerSelectionTimeoutError as err:
         print(err)
@@ -241,13 +294,41 @@ def consulta_medio_fecha(medio_collection, fecha_i=datetime.datetime(2010, 2, 15
         client.server_info() # Saca error si no conecta
         db = client.tweet_test_db
         medio_collection = limpiar_nombre_medio(medio_collection)
-        db.collection_names()
+        for medio in db.collection_names():
+            medio_limpio = limpiar_nombre_medio(medio)
+            if medio_limpio in medio_collection or medio_collection in medio_limpio:
+                medio_collection = medio
         # Limpiar lista
         collection = db[medio_collection]
         fecha_i = fecha_i.strftime('%Y-%m-%d %H:%M:%S')
         fecha_f = fecha_f.strftime('%Y-%m-%d %H:%M:%S')
         cursor = collection.find( {'created_at': {'$lt': fecha_f, '$gte': fecha_i}} )
         return list(cursor)
+
+    except pymongo.errors.ServerSelectionTimeoutError as err:
+        print(err)
+
+
+def sacar_intervalo_fecha(medio_collection):
+    try:
+        client = pymongo.MongoClient(serverSelectionTimeoutMS=1)  # default ('localhost', 27017)
+        client.server_info() # Saca error si no conecta
+        db = client.tweet_test_db
+        medio_collection = limpiar_nombre_medio(medio_collection)
+        for medio in db.collection_names():
+            medio_limpio = limpiar_nombre_medio(medio)
+            if medio_limpio in medio_collection or medio_collection in medio_limpio:
+                medio_collection = medio
+        # Limpiar lista
+        collection = db[medio_collection]
+        try:
+            fecha_i = list(collection.find().sort("created_at", pymongo.ASCENDING).limit(1))[0]
+            fecha_i = fecha_i['created_at'].split()[0]
+            fecha_f = list(collection.find().sort("created_at", pymongo.DESCENDING).limit(1))[0]
+            fecha_f = fecha_f['created_at'].split()[0]
+            return fecha_i, fecha_f
+        except:
+            return 'hola','mundo'
 
     except pymongo.errors.ServerSelectionTimeoutError as err:
         print(err)
