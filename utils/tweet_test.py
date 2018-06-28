@@ -46,8 +46,8 @@ def buscar_usuario(tweet_df, usuario):
     else:
         return None
 
-def sacar_df_y_user_medio(nombre_medio, fecha_i=datetime.datetime(2010, 2, 15), fecha_f=datetime.datetime.now()):
-    df_medio = procces_data_db(nombre_medio, fecha_i, fecha_f)
+def sacar_df_y_user_medio(nombre_medio, fecha_i=datetime.datetime(2010, 2, 15), fecha_f=datetime.datetime.now(), limit=None):
+    df_medio = procces_data_db(nombre_medio, fecha_i, fecha_f, limit)
     parar = False
     try:
         df_medio['created_at']
@@ -202,8 +202,8 @@ def procces_data_json(path='F:\Desktop\TFG\Medios_Emilio\ELPAIS.json'):
     return df
 
 # Procesa json a DF actualmente recibe path luego habra k añadir mongodb
-def procces_data_db(medio='ELPAIS', fecha_i=datetime.datetime(2010, 2, 15), fecha_f=datetime.datetime.now()):
-    df = pd.DataFrame(list(consulta_medio_fecha(medio, fecha_i, fecha_f)))
+def procces_data_db(medio='ELPAIS', fecha_i=datetime.datetime(2010, 2, 15), fecha_f=datetime.datetime.now(), limit=None):
+    df = pd.DataFrame(list(consulta_medio_fecha(medio, fecha_i, fecha_f, limit)))
     try:
         # Mirar user y entities
         df = df [[

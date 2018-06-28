@@ -288,7 +288,7 @@ def check_medio_in_medios(medio):
     except pymongo.errors.ServerSelectionTimeoutError as err:
         print(err)
 
-def consulta_medio_fecha(medio_collection, fecha_i=datetime.datetime(2010, 2, 15), fecha_f=datetime.datetime.now()):
+def consulta_medio_fecha(medio_collection, fecha_i=datetime.datetime(2010, 2, 15), fecha_f=datetime.datetime.now(), limit=None):
     try:
         client = pymongo.MongoClient(serverSelectionTimeoutMS=1)  # default ('localhost', 27017)
         client.server_info() # Saca error si no conecta
@@ -302,7 +302,10 @@ def consulta_medio_fecha(medio_collection, fecha_i=datetime.datetime(2010, 2, 15
         collection = db[medio_collection]
         fecha_i = fecha_i.strftime('%Y-%m-%d %H:%M:%S')
         fecha_f = fecha_f.strftime('%Y-%m-%d %H:%M:%S')
-        cursor = collection.find( {'created_at': {'$lt': fecha_f, '$gte': fecha_i}} )
+        if limit:
+            cursor = collection.find( {'created_at': {'$lt': fecha_f, '$gte': fecha_i}} ).sort("created_at", pymongo.DESCENDING).limit(limit)
+        else:
+            cursor = collection.find( {'created_at': {'$lt': fecha_f, '$gte': fecha_i}} )
         return list(cursor)
 
     except pymongo.errors.ServerSelectionTimeoutError as err:

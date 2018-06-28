@@ -3,15 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="174d4eed-99c2-4756-9dfc-07c646309394" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/medios/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/medios/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/medios/templates/medios/lista_medios.html" beforeDir="false" afterPath="$PROJECT_DIR$/medios/templates/medios/lista_medios.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/medios/templates/medios/medio_index.html" beforeDir="false" afterPath="$PROJECT_DIR$/medios/templates/medios/medio_index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/medios/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/medios/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/medios/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/medios/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/app/sidebar.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/app/sidebar.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/app/top_navigation.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/app/top_navigation.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usuario/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/usuario/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/utils/mongodb.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/mongodb.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/utils/tweet_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/tweet_test.py" afterDir="false" />
     </list>
@@ -42,17 +34,49 @@
   <component name="DjangoConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)">
     <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
   </component>
+  <component name="DockManager">
+    <window id="1">
+      <content type="file-editors">
+        <state>
+          <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+            <file leaf-file-name="tweet_test.py" pinned="false" current-in-tab="false">
+              <entry file="file://$PROJECT_DIR$/utils/tweet_test.py">
+                <provider selected="true" editor-type-id="text-editor">
+                  <state relative-caret-position="234">
+                    <caret line="49" column="69" selection-start-line="49" selection-start-column="15" selection-end-line="49" selection-end-column="69" />
+                    <folding>
+                      <element signature="e#0#28#0" expanded="true" />
+                    </folding>
+                  </state>
+                </provider>
+              </entry>
+            </file>
+            <file leaf-file-name="mongodb.py" pinned="false" current-in-tab="true">
+              <entry file="file://$PROJECT_DIR$/utils/mongodb.py">
+                <provider selected="true" editor-type-id="text-editor">
+                  <state relative-caret-position="321">
+                    <caret line="125" selection-start-line="125" selection-end-line="125" />
+                    <folding>
+                      <element signature="e#535#1844#0" />
+                      <element signature="e#1878#2298#0" />
+                      <element signature="e#2338#2472#0" />
+                      <element signature="e#2502#4413#0" />
+                      <element signature="e#3744#4413#1" />
+                      <element signature="e#4468#5763#0" />
+                      <element signature="e#5821#6591#0" />
+                      <element signature="e#7613#7945#0" />
+                    </folding>
+                  </state>
+                </provider>
+              </entry>
+            </file>
+          </leaf>
+        </state>
+      </content>
+    </window>
+  </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="medio_index.html" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/medios/templates/medios/medio_index.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="18">
-              <caret line="11" selection-start-line="11" selection-end-line="28" selection-end-column="18" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/medios/urls.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -62,24 +86,13 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/medios/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="115">
-              <caret line="46" selection-start-line="46" selection-end-line="46" />
+            <state relative-caret-position="190">
+              <caret line="125" column="6" selection-start-line="125" selection-start-column="6" selection-end-line="125" selection-end-column="6" />
               <folding>
                 <element signature="e#0#54#0" expanded="true" />
-                <element signature="e#1222#2274#0" />
-                <element signature="e#2323#2522#0" />
-                <element signature="e#2561#2815#0" />
-                <element signature="e#2978#3412#0" />
-                <element signature="e#3454#4447#0" />
-                <element signature="e#4540#4697#0" />
-                <element signature="e#4800#5592#0" />
-                <element signature="e#5711#6698#0" />
-                <element signature="e#6730#7197#0" />
-                <element signature="e#7325#10759#0" />
-                <element signature="e#10818#12367#0" />
               </folding>
             </state>
           </provider>
@@ -88,7 +101,7 @@
       <file leaf-file-name="sidebar.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/app/sidebar.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="201">
+            <state relative-caret-position="702">
               <caret line="39" column="107" selection-start-line="39" selection-start-column="107" selection-end-line="39" selection-end-column="107" />
             </state>
           </provider>
@@ -97,7 +110,7 @@
       <file leaf-file-name="home_tab.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/medios/templates/medios/medio_index/home_tab.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="226">
+            <state relative-caret-position="990">
               <caret line="55" column="20" selection-start-line="55" selection-start-column="20" selection-end-line="55" selection-end-column="20" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#5;n#!!top" expanded="true" />
@@ -109,11 +122,8 @@
       <file leaf-file-name="forms.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/medios/forms.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="414">
+            <state relative-caret-position="432">
               <caret line="24" column="80" selection-start-line="24" selection-start-column="80" selection-end-line="24" selection-end-column="80" />
-              <folding>
-                <element signature="e#0#24#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -131,8 +141,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>medios:index</find>
-      <find>texto</find>
       <find>test</find>
       <find>div</find>
       <find>rt</find>
@@ -161,6 +169,8 @@
       <find>sacar</find>
       <find>count</find>
       <find>get_collection</find>
+      <find>medio_index_tweets</find>
+      <find>sacar_df_y</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -209,17 +219,17 @@
         <option value="$PROJECT_DIR$/medios/templates/medios/medio_index/tweets_tab.html" />
         <option value="$PROJECT_DIR$/medios/templates/medios/medio_index/info_tab.html" />
         <option value="$PROJECT_DIR$/medios/forms.py" />
-        <option value="$PROJECT_DIR$/utils/tweet_test.py" />
         <option value="$PROJECT_DIR$/medios/models.py" />
         <option value="$PROJECT_DIR$/medios/templates/medios/medio_index.html" />
         <option value="$PROJECT_DIR$/templates/app/top_navigation.html" />
         <option value="$PROJECT_DIR$/usuario/views.py" />
         <option value="$PROJECT_DIR$/medios/templates/medios/medio_index/home_tab.html" />
-        <option value="$PROJECT_DIR$/medios/views.py" />
-        <option value="$PROJECT_DIR$/utils/mongodb.py" />
         <option value="$PROJECT_DIR$/medios/templates/medios/lista_medios.html" />
         <option value="$PROJECT_DIR$/medios/urls.py" />
         <option value="$PROJECT_DIR$/templates/app/sidebar.html" />
+        <option value="$PROJECT_DIR$/utils/tweet_test.py" />
+        <option value="$PROJECT_DIR$/utils/mongodb.py" />
+        <option value="$PROJECT_DIR$/medios/views.py" />
       </list>
     </option>
   </component>
@@ -257,9 +267,9 @@
       <path value="$PROJECT_DIR$/medios/static/static/vendors/transitionize/package.json" />
     </packageJsonPaths>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
-    <option name="x" value="5" />
-    <option name="y" value="-18" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="139" />
+    <option name="y" value="-8" />
     <option name="width" value="1936" />
     <option name="height" value="1056" />
   </component>
@@ -284,34 +294,7 @@
             <path>
               <item name="ProyectoTFG" type="b2602c69:ProjectViewProjectNode" />
               <item name="ProyectoTFG" type="462c0819:PsiDirectoryNode" />
-              <item name="medios" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ProyectoTFG" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ProyectoTFG" type="462c0819:PsiDirectoryNode" />
-              <item name="medios" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="medios" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ProyectoTFG" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ProyectoTFG" type="462c0819:PsiDirectoryNode" />
-              <item name="medios" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="medios" type="462c0819:PsiDirectoryNode" />
-              <item name="medio_index" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ProyectoTFG" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ProyectoTFG" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ProyectoTFG" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ProyectoTFG" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="utils" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -434,17 +417,17 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32897604" />
       <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.50159913" side_tool="true" weight="0.23856209" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.16013072" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.4379085" />
       <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.49946696" weight="0.32897604" />
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.32897604" />
       <window_info anchor="bottom" id="Terminal" order="13" sideWeight="0.49840087" weight="0.31045753" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.110341154" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.11247335" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="4" weight="0.32995737" />
       <window_info anchor="right" id="SciView" order="3" weight="0.32995737" />
@@ -494,7 +477,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="11" />
+      <option name="time" value="12" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
@@ -769,63 +752,17 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/medios/forms.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="414">
+        <state relative-caret-position="432">
           <caret line="24" column="80" selection-start-line="24" selection-start-column="80" selection-end-line="24" selection-end-column="80" />
-          <folding>
-            <element signature="e#0#24#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/medios/templates/medios/medio_index/home_tab.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="226">
+        <state relative-caret-position="990">
           <caret line="55" column="20" selection-start-line="55" selection-start-column="20" selection-end-line="55" selection-end-column="20" />
           <folding>
             <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#5;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/medios/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="115">
-          <caret line="46" selection-start-line="46" selection-end-line="46" />
-          <folding>
-            <element signature="e#0#54#0" expanded="true" />
-            <element signature="e#1222#2274#0" />
-            <element signature="e#2323#2522#0" />
-            <element signature="e#2561#2815#0" />
-            <element signature="e#2978#3412#0" />
-            <element signature="e#3454#4447#0" />
-            <element signature="e#4540#4697#0" />
-            <element signature="e#4800#5592#0" />
-            <element signature="e#5711#6698#0" />
-            <element signature="e#6730#7197#0" />
-            <element signature="e#7325#10759#0" />
-            <element signature="e#10818#12367#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/utils/mongodb.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="645">
-          <caret line="326" column="82" selection-start-line="326" selection-start-column="82" selection-end-line="326" selection-end-column="82" />
-          <folding>
-            <element signature="e#535#1844#0" />
-            <element signature="e#1878#2298#0" />
-            <element signature="e#2338#2472#0" />
-            <element signature="e#2502#4413#0" />
-            <element signature="e#3744#4413#1" />
-            <element signature="e#4468#5763#0" />
-            <element signature="e#5821#6591#0" />
-            <element signature="e#6628#7577#0" />
-            <element signature="e#7613#7945#0" />
-            <element signature="e#9087#9428#0" />
-            <element signature="e#9468#10220#0" />
-            <element signature="e#10343#11199#0" />
-            <element signature="e#11217#11636#0" />
           </folding>
         </state>
       </provider>
@@ -834,11 +771,20 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="469">
           <caret line="36" lean-forward="true" selection-start-line="36" selection-end-line="36" />
-          <folding>
-            <element signature="e#865#882#0#HTML" expanded="true" />
-            <element signature="e#764#788#0#HTML" expanded="true" />
-            <element signature="e#3006#3069#0#HTML" expanded="true" />
-          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/app/sidebar.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="702">
+          <caret line="39" column="107" selection-start-line="39" selection-start-column="107" selection-end-line="39" selection-end-column="107" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/medios/templates/medios/medio_index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-162">
+          <caret line="33" column="37" lean-forward="true" selection-start-line="33" selection-start-column="37" selection-end-line="33" selection-end-column="37" />
         </state>
       </provider>
     </entry>
@@ -849,27 +795,40 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/medios/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="125" column="6" selection-start-line="125" selection-start-column="6" selection-end-line="125" selection-end-column="6" />
+          <folding>
+            <element signature="e#0#54#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/utils/tweet_test.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="735">
-          <caret line="193" column="15" lean-forward="true" selection-start-line="193" selection-start-column="15" selection-end-line="193" selection-end-column="15" />
+        <state relative-caret-position="234">
+          <caret line="49" column="69" selection-start-line="49" selection-start-column="15" selection-end-line="49" selection-end-column="69" />
           <folding>
             <element signature="e#0#28#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/app/sidebar.html">
+    <entry file="file://$PROJECT_DIR$/utils/mongodb.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="201">
-          <caret line="39" column="107" selection-start-line="39" selection-start-column="107" selection-end-line="39" selection-end-column="107" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/medios/templates/medios/medio_index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18">
-          <caret line="11" selection-start-line="11" selection-end-line="28" selection-end-column="18" />
+        <state relative-caret-position="321">
+          <caret line="125" selection-start-line="125" selection-end-line="125" />
+          <folding>
+            <element signature="e#535#1844#0" />
+            <element signature="e#1878#2298#0" />
+            <element signature="e#2338#2472#0" />
+            <element signature="e#2502#4413#0" />
+            <element signature="e#3744#4413#1" />
+            <element signature="e#4468#5763#0" />
+            <element signature="e#5821#6591#0" />
+            <element signature="e#7613#7945#0" />
+          </folding>
         </state>
       </provider>
     </entry>

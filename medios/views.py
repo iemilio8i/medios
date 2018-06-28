@@ -122,7 +122,8 @@ def grafica_palabras_form(request):
         return grafica_palabras(request)
 
 # Submethod of medio index for managing list of tweets
-def medio_index_tweets_tab(df):
+def medio_index_tweets_tab(medio_nombre, fecha_i, fecha_f):
+    df = procces_data_db(medio_nombre, fecha_i, fecha_f, limit=100)
     modified_df = df[['user_screen_name', 'user_name', 'id_str', 'text', 'retweet_count', 'favorite_count', 'created_at']]
     return modified_df.values.tolist()
 
@@ -241,7 +242,7 @@ def medio_index(request, medio_nombre='elpais', fecha_i=datetime.datetime(2010, 
     over_context['rest_tweets']-= n_medio_tweets
 
     # Tweet list tab proccesing
-    df_list = medio_index_tweets_tab(df)
+    df_list = medio_index_tweets_tab(medio_nombre, fecha_i, fecha_f)
     uniq_users = len(set(df['user_screen_name']))
 
     # Wait for every thread to finish his jon
